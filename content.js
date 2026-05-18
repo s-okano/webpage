@@ -28,8 +28,9 @@ const NEWS = [
     },
     {
         date: "2026.04.01",
-        tag:  "Fellowship",
-        text: "九州大学およびNational Taiwan Universityのダブル・ディグリー・プログラムを修了し，修士（工学）とMaster of Scienceの学位を取得しました！また，九州大学の博士後期課程に進学し，日本学術振興会 特別研究員（DC1）として採用されました！",
+        tag:  "Graduation",
+        text: "九州大学およびNational Taiwan Universityのダブル・ディグリー・プログラムを修了し，修士（工学）とMaster of Scienceの学位を取得しました！<br>また，九州大学の博士後期課程に入学し，日本学術振興会 特別研究員（DC1）として採用されました！",
+        img:  "",
     },
 ];
 
@@ -69,9 +70,10 @@ const PROFILE = {
     ],
 
     interests: [
-        { ja: "防災工学",   en: "Disaster Prevention" },
+        { ja: "防災",       en: "Disaster Prevention" },
+        { ja: "応用力学",   en: "Applied Mechanics" },
+        { ja: "計算工学",   en: "Computational Engineering" },
         { ja: "粒子法",     en: "SPH Method" },
-        { ja: "数値解析",   en: "Numerical Simulation" },
         { ja: "高性能計算", en: "HPC" },
     ],
 
