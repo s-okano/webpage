@@ -21,20 +21,15 @@
    ============================================================ */
 const NEWS = [
     {
-        date: "2026.05",
+        date: "2026.05.17",
         tag:  "Conference",
         text: "第29回応用力学シンポジウムに参加しました！",
         img:  "news/202605_ouriki.jpg",
     },
     {
-        date: "2026.04",
+        date: "2026.04.01",
         tag:  "Fellowship",
-        text: "九州大学の博士後期課程に進学し，日本学術振興会 特別研究員（DC1）として採用されました！",
-    },
-    {
-        date: "2026.03",
-        tag:  "Graduation",
-        text: "九州大学およびNational Taiwan Universityのダブル・ディグリー・プログラムを修了し，修士（工学）とMaster of Scienceの学位を取得しました！",
+        text: "九州大学およびNational Taiwan Universityのダブル・ディグリー・プログラムを修了し，修士（工学）とMaster of Scienceの学位を取得しました！また，九州大学の博士後期課程に進学し，日本学術振興会 特別研究員（DC1）として採用されました！",
     },
 ];
 
@@ -67,7 +62,7 @@ const PROFILE = {
 
     experience: [
         {
-            period: "2026–2029",
+            period: "2026 – 2029",
             ja: "日本学術振興会 特別研究員（DC1）",
             en: "JSPS Research Fellow DC1",
         },
@@ -82,7 +77,7 @@ const PROFILE = {
 
     grants: [
         {
-            period: "2026–2029",
+            period: "2026 – 2029",
             ja: "JSPS科研費（特別研究員奨励費）",
             en: "JSPS KAKENHI Grant-in-Aid for JSPS Fellows",
         },
@@ -111,7 +106,7 @@ const PUBLICATIONS = {
             text: `<strong class="author">岡野翔大</strong>，森川ダニエル，大﨑春輝，浅井光輝 : μ(I)レオロジーを用いた流動化地盤解析の陰的SPH法による効率化，<em>土木学会論文集特集号（応用力学）</em>，Vol. 80, No. 15, pp.23-15018, 2024.
 [<strong class="author">Shodai Okano</strong>, Daniel Morikawa, Haruki Osaki and Mitsuteru Asai: Efficient Fluidized Ground Analysis using µ(I) Rheology with Implicit SPH Method, <em>Japanese Journal of JSCE No.2 Special issue (Applied Mechanics)</em>, Vol. 80, No. 15, p.23-15018, 2024.]`,
             doi:   "https://doi.org/10.2208/jscejj.23-15018",
-            award: "令和5年度応用力学論文賞",
+            award: "応用力学論文賞",
         },
     ],
 
