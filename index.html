@@ -3,393 +3,480 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shodai OKANO's HP</title>
+    <title>Shodai OKANO</title>
     <meta name="description" content="岡野翔大（Shodai OKANO）の個人ホームページです．">
     <link rel="icon" href="/okano.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="/okano.ico">
-    <link rel="stylesheet" href="styles.css">    
     <meta name="keywords" content="岡野翔大, Shodai OKANO, HP, 九大, 九州大学, Kyushu Univ, 土木, 防災, 斜面崩壊, 津波, シミュレーション, 粒子法, SPH, GPU">
     <meta name="author" content="Shodai OKANO">
-    <meta property="og:title" content="Shodai OKANO's HP">
+    <meta property="og:title" content="Shodai OKANO">
     <meta property="og:description" content="岡野翔大（Shodai OKANO）の個人ホームページです．">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://s-okano.vercel.app/">
-    <!-- <meta property="og:image" content="https://s-okano.vercel.app/profile.jpg"> -->
     <meta name="google-site-verification" content="00_bddyedjiXW6z0KUNVeZyj1U-i1OumWjdgasFfZNE" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=BIZ+UDPGothic:wght@400;700&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --cream:       #f5f2ec;
+    --cream-dark:  #ede9e0;
+    --ink:         #1a1814;
+    --ink-mid:     #3d3a34;
+    --ink-muted:   #7a756c;
+    --ink-faint:   #b5b0a8;
+    --accent:      #2d4a3e;
+    --accent-warm: #8b5e3c;
+    --rule:        rgba(26,24,20,.12);
+    --serif-display: 'Cormorant Garamond', 'BIZ UDPGothic', sans-serif;
+    --serif-body:    'BIZ UDPGothic', sans-serif;
+    --sans:          'DM Sans', 'BIZ UDPGothic', sans-serif;
+    --nav-h: 60px;
+    --transition: .4s cubic-bezier(.4,0,.2,1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { background: var(--cream); color: var(--ink); font-family: var(--serif-body); font-weight: 300; line-height: 1.8; overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+strong.author { text-decoration: underline; text-underline-offset: 3px; }
+
+/* NAV */
+nav#main-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h); display: flex; align-items: center; justify-content: flex-end; padding: 0 3rem; transition: background var(--transition), border-color var(--transition); }
+nav#main-nav.scrolled { background: rgba(245,242,236,.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--rule); }
+.nav-links { display: flex; gap: 2.5rem; align-items: center; }
+.nav-links a { font-family: var(--sans); font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(245,242,236,.75); transition: color var(--transition); position: relative; }
+nav#main-nav.scrolled .nav-links a { color: var(--ink-muted); }
+.nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width var(--transition); }
+.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+nav#main-nav.scrolled .nav-links a:hover { color: var(--ink); }
+.nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.nav-toggle span { display: block; width: 24px; height: 1px; background: var(--cream); transition: all var(--transition); }
+nav#main-nav.scrolled .nav-toggle span { background: var(--ink); }
+.nav-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+.nav-mobile-menu { display: none; position: fixed; inset: 0; z-index: 99; background: var(--cream); flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+.nav-mobile-menu.open { display: flex; }
+.nav-mobile-menu a { font-family: var(--serif-body); font-size: 1.5rem; font-style: normal; color: var(--ink); letter-spacing: .1em; }
+
+/* HERO */
+#home { position: relative; width: 100%; height: 100svh; min-height: 600px; overflow: hidden; display: flex; align-items: flex-end; padding: 5rem 3rem; background: #4a4a4a; }
+.video-wrap { position: absolute; inset: 0; z-index: 0; }
+.video-wrap video { width: 100%; height: 100%; object-fit: cover; }
+.video-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,8,.72) 0%, rgba(10,10,8,.18) 55%, rgba(10,10,8,.05) 100%); }
+.hero-content { position: relative; z-index: 1; max-width: 800px; }
+.hero-label { font-family: var(--sans); font-size: .68rem; letter-spacing: .24em; text-transform: uppercase; color: rgba(245,242,236,.55); margin-bottom: 1.2rem; }
+.hero-name-ja { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 300; line-height: 1.05; color: #f5f2ec; display: block; }
+.hero-name-en { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.2rem, 2.5vw, 1.8rem); font-weight: 300; font-style: italic; color: rgba(245,242,236,.6); display: block; margin-top: .5rem; letter-spacing: .06em; }
+.hero-affil { font-family: var(--sans); font-size: .78rem; color: rgba(245,242,236,.5); letter-spacing: .06em; margin-top: 1.4rem; line-height: 1.7; }
+.hero-scroll { position: absolute; bottom: 2.5rem; right: 3rem; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; font-family: var(--sans); font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(245,242,236,.4); }
+.hero-scroll-line { width: 1px; height: 60px; background: linear-gradient(to bottom, transparent, rgba(245,242,236,.35)); animation: scrollPulse 2.4s ease-in-out infinite; }
+@keyframes scrollPulse { 0%,100% { opacity: .4; transform: scaleY(1); } 50% { opacity: .9; transform: scaleY(1.1); } }
+
+/* SECTION */
+.section { padding: 8rem 3rem; max-width: 1100px; margin: 0 auto; }
+.section-header { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 5rem; border-bottom: 1px solid var(--rule); padding-bottom: 1.5rem; }
+.section-number { font-family: var(--sans); font-size: .65rem; letter-spacing: .2em; color: var(--ink-faint); }
+.section-title { font-family: var(--serif-body); font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700; letter-spacing: .05em; color: var(--ink); }
+.section-title-en { font-family: var(--sans); font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-faint); margin-left: auto; }
+
+/* NEWS */
+#news { border-top: 1px solid var(--rule); }
+.news-track { display: flex; gap: 1.5rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 1.5rem; cursor: grab; }
+.news-track:active { cursor: grabbing; }
+.news-track::-webkit-scrollbar { height: 3px; }
+.news-track::-webkit-scrollbar-track { background: var(--cream-dark); }
+.news-track::-webkit-scrollbar-thumb { background: var(--ink-faint); border-radius: 99px; }
+.news-card { flex: 0 0 280px; scroll-snap-align: start; border: 1px solid var(--rule); border-radius: 2px; overflow: hidden; background: #fff; display: flex; flex-direction: column; transition: border-color var(--transition); }
+.news-card:hover { border-color: rgba(26,24,20,.3); }
+.news-card-img-wrap { overflow: hidden; }
+.news-card-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; filter: grayscale(20%); transition: filter var(--transition), transform .5s ease; }
+.news-card:hover .news-card-img { filter: grayscale(0%); transform: scale(1.02); }
+.news-card-body { padding: 1.1rem 1.2rem 1.3rem; display: flex; flex-direction: column; gap: .5rem; flex: 1; }
+.news-card-meta { display: flex; align-items: center; gap: .6rem; }
+.news-card-date { font-family: var(--sans); font-size: .65rem; letter-spacing: .1em; color: var(--ink-faint); }
+.news-card-tag { font-family: var(--sans); font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(45,74,62,.3); padding: .1rem .5rem; border-radius: 99px; }
+.news-card-text { font-size: .83rem; line-height: 1.7; color: var(--ink-mid); }
+.news-nav { display: flex; gap: .75rem; margin-top: 1.2rem; justify-content: flex-end; }
+.news-nav-btn { width: 36px; height: 36px; border: 1px solid var(--rule); border-radius: 50%; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: .9rem; color: var(--ink-muted); transition: background var(--transition), border-color var(--transition); }
+.news-nav-btn:hover { background: var(--cream-dark); border-color: rgba(26,24,20,.3); }
+
+/* PROFILE */
+#profile { border-top: 1px solid var(--rule); }
+.profile-grid { display: grid; grid-template-columns: 280px 1fr; gap: 5rem; align-items: start; }
+.profile-photo { position: sticky; top: calc(var(--nav-h) + 2rem); }
+.profile-photo img { width: 100%; aspect-ratio: 3/4; object-fit: cover; filter: grayscale(15%); transition: filter var(--transition); }
+.profile-photo img:hover { filter: grayscale(0%); }
+.profile-photo figcaption { font-family: var(--sans); font-size: .65rem; letter-spacing: .12em; color: var(--ink-faint); margin-top: .75rem; text-align: center; text-transform: uppercase; }
+.profile-data { display: flex; flex-direction: column; gap: 3rem; }
+.data-group { }
+.data-label { font-family: var(--sans); font-size: .62rem; letter-spacing: .22em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 1rem; padding-bottom: .5rem; border-bottom: 1px solid var(--rule); }
+.data-items { display: flex; flex-direction: column; gap: .6rem; }
+.data-item { font-size: 1rem; line-height: 1.7; color: var(--ink-mid); }
+.data-item .year { font-family: var(--sans); font-size: .72rem; color: var(--accent); margin-right: .5rem; }
+.data-item .sub { font-size: .8rem; color: var(--ink-faint); display: block; font-style: italic; }
+.data-item a { color: var(--accent); border-bottom: 1px solid transparent; transition: border-color var(--transition); }
+.data-item a:hover { border-bottom-color: var(--accent); }
+.tags { display: flex; flex-wrap: wrap; gap: .5rem; }
+.tag { font-family: var(--sans); font-size: .68rem; letter-spacing: .1em; color: var(--accent); border: 1px solid rgba(45,74,62,.3); padding: .25rem .75rem; border-radius: 99px; }
+
+/* PUBLICATION */
+#publication { border-top: 1px solid var(--rule); }
+.pub-category { margin-bottom: 4rem; }
+.pub-category-header { padding: 1rem 0; border-bottom: 1px solid var(--rule); }
+.pub-category-title { font-family: var(--sans); font-size: .82rem; letter-spacing: .15em; text-transform: uppercase; color: var(--ink-mid); }
+.pub-item { display: grid; grid-template-columns: 1.5rem 1fr; gap: 0 1rem; padding: 1.4rem 0; border-bottom: 1px solid var(--rule); }
+.pub-num { font-family: var(--sans); font-size: .75rem; color: var(--ink-faint); padding-top: .15rem; }
+.pub-text { font-size: 1rem; line-height: 1.85; color: var(--ink-mid); }
+.pub-text em { font-style: italic; color: var(--ink); }
+.pub-award { display: inline-block; font-family: var(--serif-body); font-size: .85rem; font-weight: 700; letter-spacing: .05em; color: var(--cream); background: var(--accent-warm); padding: .2rem .8rem; border-radius: 99px; margin-top: .5rem; }
+.pub-text a { color: var(--accent); word-break: break-all; border-bottom: 1px solid transparent; transition: border-color var(--transition); }
+.pub-text a:hover { border-bottom-color: var(--accent); }
+
+/* CONTACT */
+#contact { border-top: 1px solid var(--rule); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+.contact-block-label { font-family: var(--sans); font-size: .62rem; letter-spacing: .22em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 1.2rem; padding-bottom: .5rem; border-bottom: 1px solid var(--rule); }
+.contact-line { font-size: .9rem; color: var(--ink-mid); line-height: 2; }
+.contact-line a { color: var(--accent); border-bottom: 1px solid transparent; transition: border-color var(--transition); }
+.contact-line a:hover { border-bottom-color: var(--accent); }
+
+/* FOOTER */
+footer { border-top: 1px solid var(--rule); padding: 2.5rem 3rem; max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+.footer-copy { font-family: var(--sans); font-size: .65rem; letter-spacing: .12em; color: var(--ink-faint); }
+.footer-links { display: flex; gap: 1.5rem; }
+.footer-links a { font-family: var(--sans); font-size: .65rem; letter-spacing: .12em; color: var(--ink-faint); transition: color var(--transition); }
+.footer-links a:hover { color: var(--accent); }
+
+/* BACK TO TOP */
+#back-top { position: fixed; bottom: 2rem; right: 2rem; z-index: 50; width: 44px; height: 44px; border: 1px solid var(--rule); background: rgba(245,242,236,.85); backdrop-filter: blur(8px); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: opacity var(--transition), background var(--transition); font-family: var(--sans); font-size: .75rem; color: var(--ink-muted); }
+#back-top.visible { opacity: 1; pointer-events: auto; }
+#back-top:hover { background: var(--cream-dark); }
+
+/* FADE IN */
+.fade-in { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
+.fade-in.visible { opacity: 1; transform: none; }
+
+/* RESPONSIVE */
+@media (max-width: 800px) {
+    nav#main-nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .nav-toggle { display: flex; }
+    #home { padding: 4rem 1.5rem; }
+    .hero-scroll { right: 1.5rem; }
+    .section { padding: 5rem 1.5rem; }
+    .profile-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .profile-photo { position: static; max-width: 240px; margin: 0 auto; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    footer { flex-direction: column; gap: 1rem; align-items: flex-start; }
+    .section-header { flex-wrap: wrap; gap: .5rem; }
+    .section-title-en { margin-left: 0; }
+}
+</style>
 </head>
 <body>
-<!------------------------------------------------------------------- home ------------------------------------------------------------------->
-    <section id = 'home' class="subpage">
-        <div class="video-background">
-            <video autoplay muted loop playsinline poster="background.jpg" id="bg-video">
-                <source src="background.mov" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-        <div class="left">
-            <div class="header">
-                <h1 class="japanese-name">岡野 翔大</h1>
-                <h1 class="english-name">Shodai OKANO</h1>
-            </div>
-            <div class="footer">
-                <div class="links">
-                    <ul>
-                        <li><a href="#" data-target='profile'>Profile</a></li>
-                        <li><a href="#" data-target='publication'>Publication</a></li>
-                        <li><a href="#" data-target='contact'>Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-<!------------------------------------------------------------------- profile ------------------------------------------------------------------->
-    <section id = 'profile' class="subpage">
-        <header>
-            <div class="left">
-                <a href="#" data-target='home'>Home</a>
-            </div>
-            <div class="right">
-                <a href="#" data-target='profile'>Profile</a>
-                <a href="#" data-target='publication'>Publication</a>
-                <a href="#" data-target='contact'>Contact</a>
-            </div>
-        </header>
 
-        <h1>Profile</h1>
-        <div class="profile-box">
-            <div class="profile-image">
-                <picture>
-                    <source srcset="profile.jpg" type="image/jpeg">
-                    <img src="profile.jpg" alt="Shodai Okano Profile Photo">
-                </picture>
-            </div>
-            <div class="profile-text">
-            <!-------------------- 氏名 -------------------->
-            <a > <br></a>
-            <div class="collapsible-wrapper">
-                <div class="collapsible-header">
-                    <h2 class="collapsible-toggle">氏名 | Name</h2>
-                </div>
-            </div>
-            <ul>
-                <li>岡野翔大 | Shodai OKANO</li>
-            </ul>
-            <!-------------------- 所属 -------------------->
-            <div class="collapsible-wrapper">
-                <div class="collapsible-header">
-                    <h2 class="collapsible-toggle">所属 | Affiliation</h2>
-                </div>
-            </div>
-            <ul>
-                <li>九州大学大学院 工学府土木工学専攻 博士後期課程 <br>
-                    Doctoral course in Civil Engineering, Kyushu University</li>
-                <li><a href="https://saigaisuuriken-hp-main.vercel.app/" target="_blank">災害数理研究室</a><br>Crisis Informatics Laboratory</li>
-            </ul>
-            <!-------------------- 学歴 -------------------->
-            <div class="collapsible-wrapper">
-                <div class="collapsible-header">
-                    <h2 class="collapsible-toggle">学歴 | Education</h2>
-                </div>
-            </div>
-            <ul>
-                <li>碩士（理學）, 國立台灣大學, 2026年4月 <br>
-                    Master of Science, National Taiwan University, April 2026 </li>
-                <li>修士（工学）, 九州大学, 2026年3月 <br>
-                    Master of Engineering, Kyushu University, March 2026 </li>
-                <li>学士（工学）, 九州大学, 2023年3月 <br>
-                    Bachelor of Engineering, Kyushu University, March 2023 </li>
-                <li>準学士, 神戸市立工業高等専門学校, 2021年3月 <br>
-                    Foundation degree, Kobe City College of Technology, March 2021 </li>
-            </ul>
-            <!-------------------- 職歴 -------------------->
-            <div class="collapsible-wrapper">
-                <div class="collapsible-header">
-                    <h2 class="collapsible-toggle">職歴 | Experience</h2>
-                </div>
-            </div>
-            <ul>
-                <li>2026年4月 - 2029年3月 : 日本学術振興会 特別研究員 (DC1) <br>
-                    April 2026 - March 2029 : JSPS Research Fellow (DC1)</li>
-            </ul>
-            <!-------------------- 研究対象 -------------------->
-            <div class="collapsible-wrapper">
-                <div class="collapsible-header">
-                    <h2 class="collapsible-toggle">研究対象 | Interests</h2>
-                </div>
-            </div>
-            <ul>
-                <li>防災工学<br>Disaster Prevention Engineering</li>
-                <li>数値解析<br>Numerical Simulation</li>
-                <li>粒子法<br>Particle Method</li>
-                <li>高性能計算<br>High Performance Computing</li>
-            </ul>
-            <!-------------------- 学会 -------------------->
-            <div class="collapsible-wrapper">
-                <div class="collapsible-header">
-                    <h2 class="collapsible-toggle">所属学会 | Academic Societies</h2>
-                </div>
-            </div>
-                <ul>
-                    <li><a href="https://www.jsce.or.jp/" target="_blank">公益社団法人 土木学会</a> <br>
-                        Japan Society of Civil Engineers (JSCE)</li>
-                    <li><a href="https://www.jsces.org/" target="_blank">一般社団法人 日本計算工学会</a> <br>
-                        Japan Society for Computational Engineering and Science (JSCES)</li>
-                </ul>
-            <!-------------------- 助成金 -------------------->
-            <div class="collapsible-wrapper">
-                <div class="collapsible-header">
-                    <h2 class="collapsible-toggle">助成金 | Grants</h2>
-                </div>
-            </div>
-            <ul>
-                <li>2026年4月 - 2029年3月 : JSPS科研費（特別研究員奨励費）<br>
-                    April 2026 - March 2029 : JSPS KAKENHI Grant-in-Aid for JSPS Fellows</li>
-            </ul>
-            <!-------------------- 外部リンク -------------------->
-            <div class="collapsible-wrapper">
-                <div class="collapsible-header">
-                    <h2 class="collapsible-toggle">外部リンク | Links</h2>
-                </div>
-            </div>
-                <ul>
-                    <li><a href="https://scholar.google.com/citations?user=LJXmIbsAAAAJ" target="_blank">Google Scholar</a></li>
-                    <li><a href="https://www.researchgate.net/profile/Shodai-Okano" target="_blank">ResearchGate</a></li>
-                    <li><a href="https://researchmap.jp/shodai-okano" target="_blank">researchmap</a></li>
-                </ul>
-            </div>
-        </div>
-    </section>
-<!------------------------------------------------------------------- publication ------------------------------------------------------------------->
-    <section id='publication' class="subpage">
-        <header>
-            <div class="left">
-                <a href="#" data-target='home'>Home</a>
-            </div>
-            <div class="right">
-                <a href="#" data-target='profile'>Profile</a>
-                <a href="#" data-target='publication'>Publication</a>
-                <a href="#" data-target='contact'>Contact</a>
-            </div>
-        </header>        
-        <h1>Publications</h1>
-        <div class="others-box">
-            <div class="others-text">
-                <!------------------------------------------- 査読有り論文（主著） ------------------------------------------->
-                <div class="collapsible-wrapper">
-                    <div class="collapsible-header">
-                        <h2 class="collapsible-toggle pc-only">査読有り論文（主著） | Peer-Reviewed Papers (1st-author)</h2>
-                        <h2 class="collapsible-toggle mobile-only">査読有り論文（主著）<br>Peer-Reviewed Papers (1st-author)</h2>
-                        <label class="switch">
-                            <input type="checkbox" class="toggle-switch" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                    <div class="collapsible-content">
-                        <ul>
-                            <li><strong class="underline">岡野翔大</strong>, 森川ダニエル, 大﨑春輝, 浅井光輝：μ(I)レオロジーを用いた流動化地盤解析の陰的SPH法による効率化, 土木学会論文集特集号（応用力学）, Vol. 80, No. 15, pp.23-15018, 2024. (doi: <a href="https://doi.org/10.2208/jscejj.23-15018" target="_blank">https://<wbr>doi.org/<wbr>10.2208/<wbr>jscejj.23-15018</a>)  [<strong class="underline">Shodai Okano</strong>, Daniel Morikawa, Haruki Osaki and Mitsuteru Asai: Efficient Fluidized Ground Analusis using µ(I) Rheology with Implicit SPH Method, <i>Japanese Journal of JSCE No.2 Special issue (Applied Mechanics)</i>, Vol. 80, No. 15, p.23-15018, 2024.]（<strong class="color">令和5年度応用力学論文賞受賞</strong>）</li>
-                        </ul>
-                    </div>
-                </div>
-                <!------------------------------------------- 査読有り論文（共著） ------------------------------------------->
-                <div class="collapsible-wrapper">
-                    <div class="collapsible-header">
-                        <h2 class="collapsible-toggle pc-only">査読有り論文（共著） | Peer-Reviewed Papers (Co-author)</h2>
-                        <h2 class="collapsible-toggle mobile-only">査読有り論文（共著）<br>Peer-Reviewed Papers (Co-author)</h2>
-                        <label class="switch">
-                            <input type="checkbox" class="toggle-switch" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                    <div class="collapsible-content">
-                        <ul>
-                            <li>Hsuan-Chih Yang, Chun-Jia Huang, Yung-Yen Ko, Kuan-Yu Chen, Chi-Chin Tsai, Chun-Hung Lin, Yu Wei Hwang, Min-Chien Chu, Yu-Syuan Jhuo, Yu-Ting Hsueh, <strong class="underline">Shodai Okano</strong>, LeeYi Wang, Louis Ge：Geotechnical Reconnaissance of Hualien Port after the 2024 ML 7.2 hualien Earthquake, <i>Soil Dynamics and Earthquake Engineering</i>, Vol. 198,  pp.109613, 2025. (doi: <a href="https://doi.org/10.1016/j.soildyn.2025.109613" target="_blank">https://<wbr>doi.org/<wbr>10.1016/<wbr>j.soildyn.2025.109613</a>)</li>
-                        </ul>
-                    </div>
-                </div>
-                <!------------------------------------------- 査読無し論文 ------------------------------------------->
-                <div class="collapsible-wrapper">
-                    <div class="collapsible-header">
-                        <h2 class="collapsible-toggle pc-only">査読無し論文 | Non-Reviewed Papers</h2>
-                        <h2 class="collapsible-toggle mobile-only">査読無し論文<br>Non-Reviewed Papers</h2>
-                        <label class="switch">
-                            <input type="checkbox" class="toggle-switch" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div >
-                    <div class="collapsible-content">
-                        <ul>
-                            <li><strong class="underline">岡野翔大</strong>, 森川ダニエル, 葛宇甯, 浅井光輝：変分マルチスケール法による安定化を導入した速度-圧力一体型SPH流体解析, 計算工学講演会論文集 (Proceedings of the Conference on Computational Engineering and Science), Vol. 30, pp. 860-864, 2025.</li>
-                            <li><strong class="underline">岡野翔大</strong>, 森川ダニエル, 大﨑春輝, 浅井光輝：μ(I)レオロジーモデルを用いた粒状流の完全陰解法型SPH解析, 計算工学講演会論文集 (Proceedings of the Conference on Computational Engineering and Science), Vol. 28, pp. 45-49, 2023.</li>
-                        </ul>
-                    </div>
-                </div>
-                <!------------------------------------------- 国際学会 ------------------------------------------->
-                <div class="collapsible-wrapper">
-                    <div class="collapsible-header">
-                        <h2 class="collapsible-toggle pc-only">国際学会 | International Conferences</h2>
-                        <h2 class="collapsible-toggle mobile-only">国際学会<br>International Conferences</h2>
-                        <label class="switch">
-                            <input type="checkbox" class="toggle-switch" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div >
-                    <div class="collapsible-content">
-                            <ul>
-                        <!------ 2027 ------>
-                                <li><strong class="underline">Shodai Okano</strong>, Daniel Morikawa, Mitsuteru Asai: hogehoge, <i>CFC 2027</i>, Yokohama, Japan, 2027.03.</li>
-                                <li><strong class="underline">Shodai Okano</strong>, Daniel Morikawa, Mitsuteru Asai: hogehoge, <i>20th SPHERIC World Conference</i>, Rome, Italy, 2027.02.</li>
-                        <!------ 2025 ------>
-                                <li><strong class="underline">Shodai Okano</strong>, Daniel Morikawa, Louis Ge, Mitsuteru Asai: Stabilized velocity-pressure monolithic SPH for incompressible fluid using Variational Multiscale Method, <i>APCOM-ACCM 2025</i>, Brisbane, Australia, 2025.12.</li>
-                                <li><strong class="underline">Shodai Okano</strong>, Daniel Morikawa, Louis Ge, Mitsuteru Asai: Improvement of Wall Boundary Treatment using Velocity-Pressure Monolithic SPH Fluid Analysis Algorithm, <i>PARTICLES 2025</i>, Barcelona, Spain, 2025.10.</li>
-                                <li><strong class="underline">Shodai Okano</strong>, Daniel Morikawa, Louis Ge, Mitsuteru Asai: Velocity and pressure monolithic scheme based on SPH for fluid flow simulations with arbitrary solid wall boundaries, <i>COMPSAFE 2025</i>, Kobe, Japan, 2025.07.</li>
-                        <!------ 2023 ------>
-                                <li><strong class="underline">Shodai Okano</strong>, Mitsuteru Asai, Louis Ge: Implicit SPH Analysis of Non-Newtonian Fluids with High Viscosity Regions for Simulation of Slope Failure, <i>The 34th KKHTCNN</i>, Pattaya, Thailand, 2023.11.</li>
-                            </ul>
-                    </div>
-                </div>
-                <!------------------------------------------- 国内学会 ------------------------------------------->
-                <div class="collapsible-wrapper">
-                    <div class="collapsible-header">
-                        <h2 class="collapsible-toggle pc-only">国内学会 | Domestic Conferences</h2>
-                        <h2 class="collapsible-toggle mobile-only">国内学会<br>Domestic Conferences</h2>
-                        <label class="switch">
-                            <input type="checkbox" class="toggle-switch" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div >
-                    <div class="collapsible-content">
-                            <ul>
-                        <!------ 2026 ------>
-                                <!-- <li><strong class="underline">岡野翔大</strong>：hogehoge（ポスター発表）, JSCES夏季学生講演会2026, 茨城, 2026.09.</li>
-                                <li><strong class="underline">岡野翔大</strong>, 森川ダニエル, 浅井光輝：速度-圧力一体型SPH法（VM-SPH）による高精度・ロバストな高粘性流体解析, 令和8年度土木学会全国大会 第81回年次学術講演会, 北海道, 2026.09.</li>
-                                <li><strong class="underline">岡野翔大</strong>, 森川ダニエル, 一色正晴, 浅井光輝：VM-SPHによる3次元大規模流体解析に向けた前処理付き反復ソルバーの開発, 第31回計算工学講演会, 愛知, 2026.06.</li> -->
-                                <li><strong class="underline">岡野翔大</strong>, 森川ダニエル, 浅井光輝：VM-SPH法による高粘性流体解析の効率化, 第29回応用力学シンポジウム, 千葉, 2026.05.</li>
-                        <!------ 2025 ------>
-                                <li><strong class="underline">岡野翔大</strong>：固体-流体の強連成解析に向けたVM-SPH法の開発（ポスター発表）, JSCES夏季学生講演会2025, 茨城, 2025.09.</li>
-                                <li><strong class="underline">岡野翔大</strong>, 森川ダニエル, 葛宇甯, 浅井光輝：あらゆる壁面形状でのSPH流体解析に適用可能な速度-圧力一体型解法の開発（ポスター発表）, 令和7年度土木学会全国大会 第80回年次学術講演会, 熊本, 2025.09.（<strong class="color">優秀ポスター発表賞受賞</strong>）</li>
-                                <li><strong class="underline">岡野翔大</strong>, 森川ダニエル, 葛宇甯, 浅井光輝：変分マルチスケール法による安定化を導入した速度-圧力一体型SPH流体解析, 第30回計算工学講演会, 埼玉, 2025.06.</li>
-                                <li><strong class="underline">岡野翔大</strong>, 森川ダニエル, 葛宇甯, 浅井光輝：速度-圧力一体型SPH法による壁面境界処理の改良, 第28回応用力学シンポジウム, 京都, 2025.05.</li>
-                        <!------ 2024 ------>
-                                <li><strong class="underline">岡野翔大</strong>, 森川ダニエル, 葛宇甯, 浅井光輝：任意形状の壁境界に適用可能な速度-圧力一体型SPH流体解析, 令和6年度土木学会西部支部研究発表会, 沖縄, 2025.03.（<strong class="color">優秀講演賞受賞</strong>）</li>
-                                <li><strong class="underline">岡野翔大</strong>：GPUを用いた大規模斜面崩壊解析, 2024年度計算力学若手研究者交流会, 宮城, 2024.09.</li>
-                        <!------ 2023 ------>
-                                <li><strong class="underline">岡野翔大</strong>, 森川ダニエル, 大﨑春輝, 浅井光輝：高粘性領域を有する非ニュートン流体の陰的SPH解析, 令和5年度土木学会全国大会 第78回年次学術講演会, 広島, 2023.09.</li>
-                                <li><strong class="underline">岡野翔大</strong>, 森川ダニエル, 大﨑春輝, 浅井光輝：μ(I)レオロジーモデルを用いた粒状流の完全陰解法型SPH解析, 第28回計算工学講演会, 茨城, 2023.05.</li>
-                                <li><strong class="underline">岡野翔大</strong>, 森川ダニエル, 大﨑春輝, 浅井光輝：斜面崩壊被害の数値予測に向けた陰的SPH法による非ニュートン流体解析の効率化, 第26回応用力学シンポジウム, 東京, 2023.05.</li>
-                        <!------ 2022 ------>
-                                <li><strong class="underline">岡野翔大</strong>, 浅井光輝：粒状体地盤を対象とする等価巨視的粘性モデルを用いたSPH解析, 令和4年度土木学会西部支部研究発表会, 熊本, 2023.03.（<strong class="color">優秀講演賞受賞</strong>）</li>
-                            </ul>
-                        </div>
-                    </div>
-                <!------------------------------------------- 招待講演 ------------------------------------------->
-                <div class="collapsible-wrapper">
-                    <div class="collapsible-header">
-                        <h2 class="collapsible-toggle pc-only">招待講演 | Invited Talks</h2>
-                        <h2 class="collapsible-toggle mobile-only">招待講演<br>Invited Talks</h2>
-                        <label class="switch">
-                            <input type="checkbox" class="toggle-switch" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div >
-                    <div class="collapsible-content">
-                        <ul>
-                            <li><strong class="underline">岡野翔大</strong>：変分マルチスケール法を導入した速度-圧力一体型流体解析アルゴリズム, 第13回マルチメソッド・新数値解析手法開拓研究会, オンライン, 2025.06.</li>
-                        </ul>
-                    </div>
-                </div>
-                <!------------------------------------------- 受賞歴 ------------------------------------------->
-                <div class="collapsible-wrapper">
-                    <div class="collapsible-header">
-                        <h2 class="collapsible-toggle pc-only">受賞歴 | Awards</h2>
-                        <h2 class="collapsible-toggle mobile-only">受賞歴<br>Awards</h2>
-                        <label class="switch">
-                            <input type="checkbox" class="toggle-switch" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div >
-                    <div class="collapsible-content">
-                        <ul>
-                            <li><strong class="underline">岡野翔大</strong>：優秀ポスター発表賞, 令和7年度土木学会全国大会 第80回年次学術講演会, 2025.09.</li>
-                            <li><strong class="underline">岡野翔大</strong>：優秀講演賞, 令和6年度土木学会西部支部研究発表会, 2025.03.</li>
-                            <li><strong class="underline">岡野翔大</strong>, 森川ダニエル, 大﨑春輝, 浅井光輝：令和5年度応用力学論文賞, 2024.05.</li>
-                            <li><strong class="underline">岡野翔大</strong>：優秀講演賞, 令和4年度土木学会西部支部研究発表会, 2023.03.</li>
-                        </ul>
-                    </div>
-                </div>
-                <!------------------------------------------- その他 ------------------------------------------->
-                <div class="collapsible-wrapper">
-                    <div class="collapsible-header">
-                        <h2 class="collapsible-toggle pc-only">その他 | Others</h2>
-                        <h2 class="collapsible-toggle mobile-only">その他<br>Others</h2>
-                        <label class="switch">
-                            <input type="checkbox" class="toggle-switch" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div >
-                    <div class="collapsible-content">
-                        <ul>
-                            <li><strong class="underline">岡野翔大</strong>：速度-壓力單片SPH方法用於穩健滑坡模擬, 2026.04. (doi: <a href="https://doi.org/10.6342/NTU202600839" target="_blank">https://<wbr>doi.org/<wbr>10.6342/<wbr>NTU202600839</a>)</li>
-                            <li><strong>Shodai Okano</strong>：<a href="https://www.ntuce-newsletter.tw/archives/16022" target="_blank">Little Step, Life-Changing Leap</a>, <i>NTUCE newsletter</i>, 2025.05.</li>
-                        </ul>
-                    </div>
-                </div>
-                <!------------------------------------------- 国内学会 ------------------------------------------->
-                <!-- <h2>受賞歴 | Awards</h2> -->
-            </div>
-        </div>
-    </section>    
-<!------------------------------------------------------------------- contact ------------------------------------------------------------------->
-    <section class="subpage" id='contact'>
-        <header>
-            <div class="left">
-                <a href="#" data-target='home'>Home</a>
-            </div>
-            <div class="right">
-                <a href="#" data-target='profile'>Profile</a>
-                <a href="#" data-target='publication'>Publication</a>
-                <a href="#" data-target='contact'>Contact</a>
-            </div>
-        </header>
-        <h1>Contact</h1>
-        <div class="others-box">
-            <div class="others-text">
-                <div class="collapsible-wrapper">
-                    <div class="collapsible-header">
-                        <h2 class="collapsible-toggle">連絡先 | Contact</h2>
-                    </div>
-                </div>
-                <p>
-                    Tel: <a href="tel:+81-92-802-3370">+81-92-802-3395</a><br>
-                    E-mail: <a href="mailto:s-fujioka@doc.kyushu-u.ac.jp">s-okano@doc.kyushu-u.ac.jp</a></p>
-                <div class="collapsible-wrapper">
-                    <div class="collapsible-header">
-                        <h2 class="collapsible-toggle">住所 | Adress</h2>
-                    </div>
-                </div>
-                <p>九州大学大学院 工学府土木工学専攻 災害数理研究室<br>
-                    〒819-0395 福岡県福岡市西区元岡744番地
-                    九州大学伊都キャンパス ウエスト2号館11階 1106号室<br>
-                    Crisis Informatics Laboratory, Department of Civil Engineering, Kyushu University<br>
-                    ​744 Motooka Nishi-ku, Fukuoka, 819-0395, Japan​​</p>
-            </div>
-        </div>
-    </section>
-    <button id="backToTop">↑ Top</button>
-    <script src="js/app.js"></script>
+<nav id="main-nav">
+    <div class="nav-links">
+        <a href="#news">News</a>
+        <a href="#profile">Profile</a>
+        <a href="#publication">Publications</a>
+        <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-toggle" id="nav-toggle" aria-label="メニュー">
+        <span></span><span></span><span></span>
+    </div>
+</nav>
 
-    <script>
-        const video = document.getElementById('bg-video');
-        let startTime = Date.now();
-        function animateHue() {
-            const now = Date.now();
-            const elapsed = (now - startTime) / 1000; // 秒数
-            const hue = (elapsed * 50) % 360; // 1秒あたり30度回転（12秒で1周）
-            video.style.filter = `hue-rotate(${hue}deg)`;
-            requestAnimationFrame(animateHue); // 次のフレームで再実行
-        }
-        animateHue();
-    </script>
+<div class="nav-mobile-menu" id="mobile-menu">
+    <a href="#news"        class="mobile-link">News</a>
+    <a href="#profile"     class="mobile-link">Profile</a>
+    <a href="#publication" class="mobile-link">Publications</a>
+    <a href="#contact"     class="mobile-link">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="home">
+    <div class="video-wrap">
+        <video autoplay muted loop playsinline id="bg-video">
+            <source src="bunny.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+    <div class="hero-content">
+        <p class="hero-label">Civil Engineering · Computational Mechanics · Disaster Prevention</p>
+        <span class="hero-name-ja">岡野 翔大</span>
+        <span class="hero-name-en">Shodai Okano</span>
+        <p class="hero-affil">
+            九州大学大学院 工学府土木工学専攻 博士後期課程<br>
+            Doctoral Course, Civil Engineering, Kyushu University<br>
+            JSPS Research Fellow DC1
+        </p>
+    </div>
+    <div class="hero-scroll">
+        <div class="hero-scroll-line"></div>
+        <span>Scroll</span>
+    </div>
+</section>
+
+<!-- NEWS（content.js から自動生成） -->
+<section id="news">
+    <div class="section">
+        <div class="section-header fade-in">
+            <span class="section-number">01</span>
+            <h2 class="section-title">News</h2>
+            <span class="section-title-en">最新情報</span>
+        </div>
+        <div class="fade-in">
+            <div class="news-track" id="news-track"></div>
+            <div class="news-nav">
+                <button class="news-nav-btn" id="news-prev" aria-label="前へ">←</button>
+                <button class="news-nav-btn" id="news-next" aria-label="次へ">→</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROFILE（content.js から自動生成） -->
+<section id="profile">
+    <div class="section">
+        <div class="section-header fade-in">
+            <span class="section-number">02</span>
+            <h2 class="section-title">Profile</h2>
+            <span class="section-title-en">プロフィール</span>
+        </div>
+        <div class="profile-grid">
+            <figure class="profile-photo fade-in">
+                <img id="profile-photo-img" src="" alt="Shodai OKANO">
+                <figcaption>Shodai OKANO</figcaption>
+            </figure>
+            <div class="profile-data" id="profile-data"></div>
+        </div>
+    </div>
+</section>
+
+<!-- PUBLICATION（content.js から自動生成） -->
+<section id="publication">
+    <div class="section">
+        <div class="section-header fade-in">
+            <span class="section-number">03</span>
+            <h2 class="section-title">Publications</h2>
+            <span class="section-title-en">研究業績</span>
+        </div>
+        <div id="publication-data"></div>
+    </div>
+</section>
+
+<!-- CONTACT（content.js から自動生成） -->
+<section id="contact">
+    <div class="section">
+        <div class="section-header fade-in">
+            <span class="section-number">04</span>
+            <h2 class="section-title">Contact</h2>
+            <span class="section-title-en">連絡先</span>
+        </div>
+        <div class="contact-grid" id="contact-data"></div>
+    </div>
+</section>
+
+<footer>
+    <span class="footer-copy">© Shodai OKANO</span>
+    <div class="footer-links" id="footer-links"></div>
+</footer>
+
+<button id="back-top" aria-label="ページトップへ">↑</button>
+
+<!-- ① 自分で編集するファイル -->
+<script src="content.js"></script>
+
+<!-- ② テンプレートエンジン（触らない） -->
+<script>
+(function () {
+
+    /* ---------- News ---------- */
+    const track = document.getElementById('news-track');
+    NEWS.forEach(n => {
+        const imgHtml = n.img
+            ? `<div class="news-card-img-wrap"><img class="news-card-img" src="${n.img}" alt="${n.alt}" onerror="this.closest('.news-card-img-wrap').style.display='none'"></div>`
+            : '';
+        track.insertAdjacentHTML('beforeend', `
+            <div class="news-card">
+                ${imgHtml}
+                <div class="news-card-body">
+                    <div class="news-card-meta">
+                        <span class="news-card-date">${n.date}</span>
+                        <span class="news-card-tag">${n.tag}</span>
+                    </div>
+                    <p class="news-card-text">${n.text}</p>
+                </div>
+            </div>`);
+    });
+
+    /* ---------- Profile ---------- */
+    document.getElementById('profile-photo-img').src = PROFILE.photo;
+    const pd = document.getElementById('profile-data');
+
+    function dataGroup(labelEn, labelJa, innerHtml) {
+        return `<div class="data-group fade-in">
+            <div class="data-label">${labelEn} ／ ${labelJa}</div>
+            <div class="data-items">${innerHtml}</div>
+        </div>`;
+    }
+
+    pd.insertAdjacentHTML('beforeend', dataGroup('Affiliation', '所属',
+        PROFILE.affiliation.map(a => {
+            const name = a.url ? `<a href="${a.url}" target="_blank">${a.ja}</a>` : a.ja;
+            return `<div class="data-item">${name}<span class="sub">${a.en}</span></div>`;
+        }).join('')
+    ));
+
+    pd.insertAdjacentHTML('beforeend', dataGroup('Education', '学歴',
+        PROFILE.education.map(e =>
+            `<div class="data-item"><span class="year">${e.year}</span>${e.ja}<span class="sub">${e.en}</span></div>`
+        ).join('')
+    ));
+
+    pd.insertAdjacentHTML('beforeend', dataGroup('Experience', '職歴',
+        PROFILE.experience.map(e =>
+            `<div class="data-item"><span class="year">${e.period}</span>${e.ja}<span class="sub">${e.en}</span></div>`
+        ).join('')
+    ));
+
+    pd.insertAdjacentHTML('beforeend', `<div class="data-group fade-in">
+        <div class="data-label">Research Interests ／ 研究対象</div>
+        <div class="tags">${PROFILE.interests.map(i =>
+            `<span class="tag">${i.ja}</span><span class="tag">${i.en}</span>`
+        ).join('')}</div>
+    </div>`);
+
+    pd.insertAdjacentHTML('beforeend', dataGroup('Grants', '助成金',
+        PROFILE.grants.map(g =>
+            `<div class="data-item"><span class="year">${g.period}</span>${g.ja}<span class="sub">${g.en}</span></div>`
+        ).join('')
+    ));
+
+    pd.insertAdjacentHTML('beforeend', dataGroup('Academic Societies', '所属学会',
+        PROFILE.societies.map(s =>
+            `<div class="data-item"><a href="${s.url}" target="_blank">${s.ja}</a><span class="sub">${s.en}</span></div>`
+        ).join('')
+    ));
+
+    pd.insertAdjacentHTML('beforeend', dataGroup('Links', '外部リンク',
+        PROFILE.links.map(l =>
+            `<div class="data-item"><a href="${l.url}" target="_blank">${l.label}</a></div>`
+        ).join('')
+    ));
+
+    /* ---------- Publications ---------- */
+    const pubEl = document.getElementById('publication-data');
+    const PUB_CATEGORIES = [
+        { key: 'peer_first',    ja: '査読有り論文（主著）',  en: 'Peer-Reviewed Papers (1st-author)' },
+        { key: 'peer_co',       ja: '査読有り論文（共著）',  en: 'Peer-Reviewed Papers (Co-author)' },
+        { key: 'non_peer',      ja: '査読無し論文',           en: 'Non-Reviewed Papers' },
+        { key: 'international', ja: '国際学会',               en: 'International Conferences' },
+        { key: 'domestic',      ja: '国内学会',               en: 'Domestic Conferences' },
+        { key: 'invited',       ja: '招待講演',               en: 'Invited Talks' },
+        { key: 'awards',        ja: '受賞歴',                 en: 'Awards' },
+        { key: 'others',        ja: 'その他',                 en: 'Others' },
+    ];
+    PUB_CATEGORIES.forEach(cat => {
+        const items = PUBLICATIONS[cat.key];
+        if (!items || items.length === 0) return;
+        const itemsHtml = items.map((p, i) => {
+            const doiHtml   = p.doi   ? `<br>doi: <a href="${p.doi}" target="_blank">${p.doi.replace('https://doi.org/','')}</a>` : '';
+            const awardHtml = p.award ? `<div><span class="pub-award">★ ${p.award}</span></div>` : '';
+            return `<div class="pub-item">
+                <span class="pub-num">${i + 1}</span>
+                <div class="pub-text">${p.text}${doiHtml}${awardHtml}</div>
+            </div>`;
+        }).join('');
+        pubEl.insertAdjacentHTML('beforeend', `
+            <div class="pub-category fade-in">
+                <div class="pub-category-header">
+                    <span class="pub-category-title">${cat.ja} &nbsp;/&nbsp; ${cat.en}</span>
+                </div>
+                <div class="pub-list">${itemsHtml}</div>
+            </div>`);
+    });
+
+    /* ---------- Contact ---------- */
+    document.getElementById('contact-data').innerHTML = `
+        <div class="fade-in">
+            <div class="contact-block-label">Direct Contact ／ 連絡先</div>
+            <p class="contact-line">Tel: <a href="tel:${CONTACT.tel}">${CONTACT.tel}</a></p>
+            <p class="contact-line">E-mail: <a href="mailto:${CONTACT.email}">${CONTACT.email}</a></p>
+        </div>
+        <div class="fade-in">
+            <div class="contact-block-label">Address ／ 所在地</div>
+            <p class="contact-line">${CONTACT.address.ja}</p>
+            <p class="contact-line" style="margin-top:1rem;">${CONTACT.address.en}</p>
+        </div>`;
+
+    /* ---------- Footer ---------- */
+    document.getElementById('footer-links').innerHTML =
+        PROFILE.links.map(l => `<a href="${l.url}" target="_blank">${l.label}</a>`).join('');
+
+    /* ---------- Nav scroll ---------- */
+    const nav = document.getElementById('main-nav');
+    const backTop = document.getElementById('back-top');
+    window.addEventListener('scroll', () => {
+        const y = window.scrollY;
+        nav.classList.toggle('scrolled', y > 60);
+        backTop.classList.toggle('visible', y > 400);
+        const sections = ['home','news','profile','publication','contact'];
+        let current = 'home';
+        sections.forEach(id => {
+            const el = document.getElementById(id);
+            if (el && el.getBoundingClientRect().top <= 80) current = id;
+        });
+        document.querySelectorAll('.nav-links a').forEach(a => {
+            a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+        });
+    }, { passive: true });
+    backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    /* ---------- Mobile menu ---------- */
+    const toggle = document.getElementById('nav-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    toggle.addEventListener('click', () => {
+        const open = toggle.classList.toggle('open');
+        mobileMenu.classList.toggle('open', open);
+        document.body.style.overflow = open ? 'hidden' : '';
+    });
+    document.querySelectorAll('.mobile-link').forEach(a => {
+        a.addEventListener('click', () => {
+            toggle.classList.remove('open');
+            mobileMenu.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+    });
+
+    /* ---------- News scroll ---------- */
+    const STEP = 300;
+    document.getElementById('news-prev').addEventListener('click', () => track.scrollBy({ left: -STEP, behavior: 'smooth' }));
+    document.getElementById('news-next').addEventListener('click', () => track.scrollBy({ left:  STEP, behavior: 'smooth' }));
+    let isDragging = false, startX, scrollLeft;
+    track.addEventListener('mousedown', e => { isDragging = true; startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft; track.style.userSelect = 'none'; });
+    window.addEventListener('mouseup', () => { isDragging = false; track.style.userSelect = ''; });
+    track.addEventListener('mousemove', e => { if (!isDragging) return; e.preventDefault(); track.scrollLeft = scrollLeft - (e.pageX - track.offsetLeft - startX); });
+
+    /* ---------- Fade-in ---------- */
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => entry.target.classList.add('visible'), i * 60);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    /* ---------- Video hue ---------- */
+
+})();
+</script>
 
 </body>
 </html>
-
