@@ -43,7 +43,7 @@ ul { list-style: none; }
 strong.author { text-decoration: underline; text-underline-offset: 3px; }
 
 /* NAV */
-nav#main-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h); display: flex; align-items: center; justify-content: flex-end; padding: 0 3rem; transition: background var(--transition), border-color var(--transition); background: rgba(245,242,236,.72); backdrop-filter: blur(8px); }
+nav#main-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h); display: flex; align-items: center; justify-content: flex-end; padding: 0 3rem; transition: background var(--transition), border-color var(--transition); }
 nav#main-nav.scrolled { background: rgba(245,242,236,.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--rule); }
 .nav-links { display: flex; gap: 2.5rem; align-items: center; }
 .nav-links a { font-family: var(--sans); font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-muted); transition: color var(--transition); position: relative; }
@@ -52,7 +52,7 @@ nav#main-nav.scrolled .nav-links a { color: var(--ink-muted); }
 .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
 .nav-links a:hover { color: var(--ink); }
 .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-.nav-toggle span { display: block; width: 24px; height: 1px; background: var(--ink); transition: all var(--transition); }
+.nav-toggle span { display: block; width: 24px; height: 1px; background: var(--ink-muted); transition: all var(--transition); }
 nav#main-nav.scrolled .nav-toggle span { background: var(--ink); }
 .nav-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
 .nav-toggle.open span:nth-child(2) { opacity: 0; }
@@ -479,23 +479,53 @@ footer { border-top: 1px solid var(--rule); padding: 2.5rem 3rem; max-width: 110
         const playPromise = video.play();
         if (playPromise !== undefined) {
             playPromise.catch(() => {
-                const notice = document.createElement('div');
-                notice.style.cssText = `
-                    position: absolute;
-                    bottom: 5rem;
-                    left: 3rem;
-                    z-index: 2;
-                    font-family: var(--sans);
-                    font-size: .7rem;
-                    letter-spacing: .08em;
+                const popup = document.createElement('div');
+                popup.style.cssText = `
+                    position: fixed;
+                    bottom: 2rem;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    z-index: 200;
+                    background: rgba(26,24,20,.88);
+                    backdrop-filter: blur(12px);
+                    color: #f5f2ec;
+                    font-family: 'BIZ UDPGothic', sans-serif;
+                    font-size: .78rem;
                     line-height: 1.8;
-                    color: rgba(245,242,236,.55);
-                    border-left: 1px solid rgba(245,242,236,.25);
-                    padding-left: 1rem;
+                    letter-spacing: .05em;
+                    padding: 1rem 1.5rem;
+                    border-radius: 6px;
+                    text-align: center;
+                    max-width: 320px;
+                    width: calc(100% - 3rem);
+                    box-shadow: 0 4px 24px rgba(0,0,0,.25);
+                    opacity: 0;
+                    transition: opacity .4s ease;
                 `;
-                notice.innerHTML = `低電力モードを解除することで，動画を再生できます<br>
-                    Disable Low Power Mode to play the background video.`;
-                document.getElementById('home').appendChild(notice);
+                popup.innerHTML = `
+                    低電力モードを解除することで，<br>動画を再生できます<br>
+                    <span style="font-size:.7rem; opacity:.6; display:block; margin-top:.3rem;">
+                        Disable Low Power Mode to play the background video.
+                    </span>
+                    <button style="
+                        margin-top: .8rem;
+                        font-family: 'BIZ UDPGothic', sans-serif;
+                        font-size: .68rem;
+                        letter-spacing: .12em;
+                        color: #f5f2ec;
+                        background: none;
+                        border: 1px solid rgba(245,242,236,.4);
+                        padding: .3rem 1rem;
+                        border-radius: 99px;
+                        cursor: pointer;
+                    ">閉じる</button>
+                `;
+                document.body.appendChild(popup);
+                requestAnimationFrame(() => { popup.style.opacity = '1'; });
+                popup.querySelector('button').addEventListener('click', () => {
+                    popup.style.opacity = '0';
+                    setTimeout(() => popup.remove(), 400);
+                });
             });
         }
     }
