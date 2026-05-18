@@ -1,21 +1,3 @@
-/**
- * ============================================================
- *  content.js  —  自分で編集するファイル
- * ============================================================
- *
- *  このファイルだけ編集すれば OK です．index.html は触らないでください．
- *
- *  【Newsの追加方法】
- *    NEWS 配列に項目を追加する（先頭が最新）
- *    img: 写真がなければ "" にする
- *
- *  【Publicationの追加方法】
- *    PUBLICATIONS の各カテゴリの配列に項目を追加する（先頭が最新）
- *    award: 受賞がなければ "" にする
- *
- * ============================================================
- */
-
 /* ============================================================
    NEWS
    ============================================================ */
@@ -23,12 +5,14 @@ const NEWS = [
     {
         date: "2026.05.17",
         tag:  "Conference",
+        pubKey: "domestic",
         text: "第29回応用力学シンポジウムに参加しました！",
         img:  "news/202605_ouriki.jpg",
     },
     {
         date: "2026.04.01",
         tag:  "Graduation",
+        pubKey: "",
         text: "九州大学およびNational Taiwan Universityのダブル・ディグリー・プログラムを修了し，修士（工学）とMaster of Scienceの学位を取得しました！<br>また，九州大学の博士後期課程に入学し，日本学術振興会 特別研究員（DC1）として採用されました！",
         img:  "",
     },
@@ -55,7 +39,7 @@ const PROFILE = {
     ],
 
     education: [
-        { year: "2026", ja: "碩士（理學），國立台灣大學",          en: "Master of Science, National Taiwan University" },
+        { year: "2026", ja: "碩士（理學），國立臺灣大學",          en: "Master of Science, National Taiwan University" },
         { year: "2026", ja: "修士（工学），九州大学",              en: "Master of Engineering, Kyushu University" },
         { year: "2023", ja: "学士（工学），九州大学",              en: "Bachelor of Engineering, Kyushu University" },
         { year: "2021", ja: "準学士，神戸市立工業高等専門学校",    en: "Foundation Degree, Kobe City College of Technology" },
@@ -240,7 +224,7 @@ const PUBLICATIONS = {
     /* --- その他 --- */
     others: [
         {
-            text: `<strong class="author">岡野翔大</strong> : 速度-壓力單片SPH方法用於穩健滑坡模擬，2026.04.`,
+            text: `<strong class="author">岡野翔大</strong> : 速度-壓力單片SPH方法用於穩健滑坡模擬，<em>臺灣大學博碩士論文典藏系統</em>, 2026.04.`,
             doi:   "https://doi.org/10.6342/NTU202600839",
             award: "",
         },
@@ -262,7 +246,7 @@ const CONTACT = {
 〒819-0395 福岡県福岡市西区元岡744番地<br>
 九州大学伊都キャンパス ウエスト2号館11階 1106号室`,
         en: `Crisis Informatics Laboratory,<br>
-Department of Civil Engineering, Kyushu University<br>
-744 Motooka, Nishi-ku, Fukuoka 819-0395, Japan`,
+Department of Civil Engineering, Kyushu University Ito Campus<br>
+744 Motooka, Nishi-ku, Fukuoka, 819-0395, Japan`,
     },
 };
