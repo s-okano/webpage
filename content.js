@@ -3,6 +3,13 @@
    ============================================================ */
 const NEWS = [
     {
+        date: "2026.06.05",
+        tag:  "Conference",
+        pubKey: "domestic",
+        text: "第31回計算工学講演会に参加しました！また，グラフィクスアワードを受賞しました！",
+        img:  "news/202606_keisan.jpg",
+    },
+    {
         date: "2026.05.17",
         tag:  "Conference",
         pubKey: "domestic",
@@ -148,6 +155,10 @@ const PUBLICATIONS = {
     /* --- 国内学会 --- */
     domestic: [
         {
+            text: `<strong class="author">岡野翔大</strong>，森川ダニエル，一色正晴，浅井光輝 : VM-SPHによる3次元大規模流体解析に向けた前処理付き反復ソルバーの開発，<em>第31回計算工学講演会</em>，愛知，2026.06.`,
+            doi: "", award: "グラフィクスアワード なんとか賞",
+        },
+        {
             text: `<strong class="author">岡野翔大</strong>，森川ダニエル，浅井光輝 : VM-SPH法による高粘性流体解析の効率化，<em>第29回応用力学シンポジウム</em>，千葉，2026.05.`,
             doi: "", award: "",
         },
@@ -203,6 +214,10 @@ const PUBLICATIONS = {
 
     /* --- 受賞歴 --- */
     awards: [
+        {
+            text: `<strong class="author">岡野翔大</strong>，森川ダニエル，一色正晴，浅井光輝 : グラフィクスアワード なんとか賞，<em>第31回計算工学講演会</em>，2026.06.`,
+            doi: "", award: "",
+        },
         {
             text: `<strong class="author">岡野翔大</strong> : 優秀ポスター発表賞，<em>令和7年度土木学会全国大会 第80回年次学術講演会</em>，2025.09.`,
             doi: "", award: "",
