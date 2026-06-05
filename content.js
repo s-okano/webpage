@@ -6,7 +6,7 @@ const NEWS = [
         date: "2026.06.05",
         tag:  "Conference",
         pubKey: "domestic",
-        text: "第31回計算工学講演会に参加しました！また，グラフィクスアワードを受賞しました！",
+        text: "第31回計算工学講演会に参加しました！また，グラフィクスアワードを3件受賞しました！",
         img:  "news/202606_keisan.jpg",
     },
     {
@@ -115,6 +115,10 @@ const PUBLICATIONS = {
     /* --- 査読無し論文 --- */
     non_peer: [
         {
+            text: `<strong class="author">Shodai Okano</strong>，Mitsuteru Asai, Daniel Shigueo Morikawa, Shujiro Fujioka, Louis Ge: A Projection-Free Monolithic SPH Formulation for Incompressible Flows Using Variational Multiscale Stabilization，<em>Preprint</em>, 2026.`,
+            doi: "10.2139/ssrn.6631870", award: "",
+        },
+        {
             text: `<strong class="author">岡野翔大</strong>，森川ダニエル，葛宇甯，浅井光輝 : 変分マルチスケール法による安定化を導入した速度-圧力一体型SPH流体解析，<em>計算工学講演会論文集</em>，Vol. 30, pp. 860-864, 2025.`,
             doi: "", award: "",
         },
@@ -156,7 +160,7 @@ const PUBLICATIONS = {
     domestic: [
         {
             text: `<strong class="author">岡野翔大</strong>，森川ダニエル，一色正晴，浅井光輝 : VM-SPHによる3次元大規模流体解析に向けた前処理付き反復ソルバーの開発，<em>第31回計算工学講演会</em>，愛知，2026.06.`,
-            doi: "", award: "グラフィクスアワード なんとか賞",
+            doi: "", award: ["グラフィクスアワード 動画賞","グラフィクスアワード 特別賞（Visual Computing賞）","グラフィクスアワード 特別賞（Digital Twin賞）"],
         },
         {
             text: `<strong class="author">岡野翔大</strong>，森川ダニエル，浅井光輝 : VM-SPH法による高粘性流体解析の効率化，<em>第29回応用力学シンポジウム</em>，千葉，2026.05.`,
@@ -215,7 +219,15 @@ const PUBLICATIONS = {
     /* --- 受賞歴 --- */
     awards: [
         {
-            text: `<strong class="author">岡野翔大</strong>，森川ダニエル，一色正晴，浅井光輝 : グラフィクスアワード なんとか賞，<em>第31回計算工学講演会</em>，2026.06.`,
+            text: `<strong class="author">岡野翔大</strong>，森川ダニエル，一色正晴，浅井光輝 : グラフィクスアワード 動画賞，<em>第31回計算工学講演会</em>，2026.06.`,
+            doi: "", award: "",
+        },
+        {
+            text: `<strong class="author">岡野翔大</strong>，森川ダニエル，一色正晴，浅井光輝 : グラフィクスアワード 特別賞（Visual Computing賞），<em>第31回計算工学講演会</em>，2026.06.`,
+            doi: "", award: "",
+        },
+        {
+            text: `<strong class="author">岡野翔大</strong>，森川ダニエル，一色正晴，浅井光輝 : グラフィクスアワード 特別賞（Digital Twin賞），<em>第31回計算工学講演会</em>，2026.06.`,
             doi: "", award: "",
         },
         {

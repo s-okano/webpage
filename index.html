@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shodai Okano</title>
-    <meta name="description" content="岡野翔大（Shodai Okano）の個人ホームページです．">
-    <meta name="keywords" content="岡野翔大, Shodai, Okano, HP, Japan, 九大, 九州大学, Kyushu Univ, 土木, 防災, 斜面崩壊, 応用力学, 計算工学, シミュレーション, 粒子法, SPH, VM-SPH, GPU">
-    <meta name="author" content="Shodai Okano">
-    <meta property="og:title" content="Shodai Okano">
-    <meta property="og:description" content="岡野翔大（Shodai Okano）の個人ホームページです．">
+    <title>Shodai OKANO</title>
+    <meta name="description" content="岡野翔大（Shodai OKANO）の個人ホームページです．">
+    <link rel="icon" href="/okano.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/okano.ico">
+    <meta name="keywords" content="岡野翔大, Shodai OKANO, HP, 九大, 九州大学, Kyushu Univ, 土木, 防災, 斜面崩壊, 津波, シミュレーション, 粒子法, SPH, GPU">
+    <meta name="author" content="Shodai OKANO">
+    <meta property="og:title" content="Shodai OKANO">
+    <meta property="og:description" content="岡野翔大（Shodai OKANO）の個人ホームページです．">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://s-okano.vercel.app/">
     <meta name="google-site-verification" content="00_bddyedjiXW6z0KUNVeZyj1U-i1OumWjdgasFfZNE" />
@@ -96,9 +98,6 @@ nav#main-nav.scrolled .nav-toggle span { background: var(--ink); }
 .news-card-meta { display: flex; align-items: center; gap: .6rem; }
 .news-card-date { font-family: var(--sans); font-size: .65rem; letter-spacing: .1em; color: var(--ink-faint); }
 .news-card-tag { font-family: var(--sans); font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(45,74,62,.3); padding: .1rem .5rem; border-radius: 99px; }
-/* pubKey を持つカード全体をクリッカブルに */
-.news-card[data-pub-key] { cursor: pointer; }
-.news-card[data-pub-key]:hover { border-color: rgba(26,24,20,.4); }
 .news-card-text { font-size: .83rem; line-height: 1.7; color: var(--ink-mid); }
 .news-nav { display: flex; gap: .75rem; margin-top: 1.2rem; justify-content: flex-end; }
 .news-nav-btn { width: 36px; height: 36px; border: 1px solid var(--rule); border-radius: 50%; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: .9rem; color: var(--ink-muted); transition: background var(--transition), border-color var(--transition); }
@@ -135,17 +134,6 @@ nav#main-nav.scrolled .nav-toggle span { background: var(--ink); }
 .pub-award { display: inline-block; font-family: var(--serif-body); font-size: .85rem; font-weight: 700; letter-spacing: .05em; color: var(--cream); background: var(--accent-warm); padding: .2rem .8rem; border-radius: 99px; margin-top: .5rem; }
 .pub-text a { color: var(--accent); word-break: break-all; border-bottom: 1px solid transparent; transition: border-color var(--transition); }
 .pub-text a:hover { border-bottom-color: var(--accent); }
-
-/* ハイライト：Publicationカテゴリにジャンプしたときの強調 */
-.pub-category.highlight .pub-category-header {
-    background: rgba(45,74,62,.06);
-    border-radius: 4px 4px 0 0;
-    padding-left: .75rem;
-    transition: background .6s ease;
-}
-.pub-category.highlight .pub-category-title {
-    color: var(--accent);
-}
 
 /* CONTACT */
 #contact { border-top: 1px solid var(--rule); }
@@ -223,8 +211,7 @@ footer { border-top: 1px solid var(--rule); padding: 2.5rem 3rem; max-width: 110
         <span class="hero-name-en">Shodai Okano</span>
         <p class="hero-affil">
             九州大学大学院 工学府土木工学専攻 博士後期課程<br>
-            日本学術振興会 特別研究員 (DC1)<br>
-            Doctoral Course in Civil Engineering, Kyushu University<br>
+            Doctoral Course, Civil Engineering, Kyushu University<br>
             JSPS Research Fellow DC1
         </p>
     </div>
@@ -262,8 +249,8 @@ footer { border-top: 1px solid var(--rule); padding: 2.5rem 3rem; max-width: 110
         </div>
         <div class="profile-grid">
             <figure class="profile-photo fade-in">
-                <img id="profile-photo-img" src="" alt="Shodai Okano">
-                <figcaption>Shodai Okano</figcaption>
+                <img id="profile-photo-img" src="" alt="Shodai OKANO">
+                <figcaption>Shodai OKANO</figcaption>
             </figure>
             <div class="profile-data" id="profile-data"></div>
         </div>
@@ -295,7 +282,7 @@ footer { border-top: 1px solid var(--rule); padding: 2.5rem 3rem; max-width: 110
 </section>
 
 <footer>
-    <span class="footer-copy">© Shodai Okano</span>
+    <span class="footer-copy">© Shodai OKANO</span>
     <div class="footer-links" id="footer-links"></div>
 </footer>
 
@@ -308,28 +295,14 @@ footer { border-top: 1px solid var(--rule); padding: 2.5rem 3rem; max-width: 110
 <script>
 (function () {
 
-    /* ---------- PUB_CATEGORIES 定義（スクロール対応のため先頭で定義） ---------- */
-    const PUB_CATEGORIES = [
-        { key: 'peer_first',    ja: '査読有り論文（主著）',  en: 'Peer-Reviewed Papers (1st-author)' },
-        { key: 'peer_co',       ja: '査読有り論文（共著）',  en: 'Peer-Reviewed Papers (Co-author)' },
-        { key: 'non_peer',      ja: '査読無し論文',           en: 'Non-Reviewed Papers' },
-        { key: 'international', ja: '国際学会',               en: 'International Conferences' },
-        { key: 'domestic',      ja: '国内学会',               en: 'Domestic Conferences' },
-        { key: 'invited',       ja: '招待講演',               en: 'Invited Talks' },
-        { key: 'awards',        ja: '受賞歴',                 en: 'Awards' },
-        { key: 'others',        ja: 'その他',                 en: 'Others' },
-    ];
-
     /* ---------- News ---------- */
     const track = document.getElementById('news-track');
     NEWS.forEach(n => {
         const imgHtml = n.img
             ? `<div class="news-card-img-wrap"><img class="news-card-img" src="${n.img}" alt="${n.alt}" onerror="this.closest('.news-card-img-wrap').style.display='none'"></div>`
             : '';
-        // pubKey がある場合はカード全体に data 属性を付与
-        const pubKeyAttr = n.pubKey ? ` data-pub-key="${n.pubKey}"` : '';
         track.insertAdjacentHTML('beforeend', `
-            <div class="news-card"${pubKeyAttr}>
+            <div class="news-card">
                 ${imgHtml}
                 <div class="news-card-body">
                     <div class="news-card-meta">
@@ -398,20 +371,30 @@ footer { border-top: 1px solid var(--rule); padding: 2.5rem 3rem; max-width: 110
 
     /* ---------- Publications ---------- */
     const pubEl = document.getElementById('publication-data');
+    const PUB_CATEGORIES = [
+        { key: 'peer_first',    ja: '査読有り論文（主著）',  en: 'Peer-Reviewed Papers (1st-author)' },
+        { key: 'peer_co',       ja: '査読有り論文（共著）',  en: 'Peer-Reviewed Papers (Co-author)' },
+        { key: 'non_peer',      ja: '査読無し論文',           en: 'Non-Reviewed Papers' },
+        { key: 'international', ja: '国際学会',               en: 'International Conferences' },
+        { key: 'domestic',      ja: '国内学会',               en: 'Domestic Conferences' },
+        { key: 'invited',       ja: '招待講演',               en: 'Invited Talks' },
+        { key: 'awards',        ja: '受賞歴',                 en: 'Awards' },
+        { key: 'others',        ja: 'その他',                 en: 'Others' },
+    ];
     PUB_CATEGORIES.forEach(cat => {
         const items = PUBLICATIONS[cat.key];
         if (!items || items.length === 0) return;
         const itemsHtml = items.map((p, i) => {
-            const doiHtml   = p.doi   ? `<br>doi: <a href="${p.doi}" target="_blank">${p.doi.replace('https://doi.org/','')}</a>` : '';
-            const awardHtml = p.award ? `<div><span class="pub-award">★ ${p.award}</span></div>` : '';
+            const doiHtml   = p.doi ? `<br>doi: <a href="${p.doi}" target="_blank">${p.doi.replace('https://doi.org/','')}</a>` : '';
+            const awards    = p.award ? (Array.isArray(p.award) ? p.award : [p.award]) : [];
+            const awardHtml = awards.length ? `<div>${awards.map(a => `<span class="pub-award">★ ${a}</span>`).join(' ')}</div>` : '';
             return `<div class="pub-item">
                 <span class="pub-num">${i + 1}</span>
                 <div class="pub-text">${p.text}${doiHtml}${awardHtml}</div>
             </div>`;
         }).join('');
-        // data-pub-key 属性をカテゴリ要素に付与（タグクリック時のスクロール先として使用）
         pubEl.insertAdjacentHTML('beforeend', `
-            <div class="pub-category fade-in" data-pub-key="${cat.key}">
+            <div class="pub-category fade-in">
                 <div class="pub-category-header">
                     <span class="pub-category-title">${cat.ja} &nbsp;/&nbsp; ${cat.en}</span>
                 </div>
@@ -436,47 +419,6 @@ footer { border-top: 1px solid var(--rule); padding: 2.5rem 3rem; max-width: 110
     document.getElementById('footer-links').innerHTML =
         PROFILE.links.map(l => `<a href="${l.url}" target="_blank">${l.label}</a>`).join('');
 
-    /* ---------- スムーズスクロール（要素指定版） ---------- */
-    function smoothScrollToEl(el, offset) {
-        const off = offset !== undefined ? offset : 80; // nav分のオフセット
-        const start = window.scrollY;
-        const end   = el.getBoundingClientRect().top + window.scrollY - off;
-        const duration = 800;
-        let startTime = null;
-        function ease(t) { return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2, 3)/2; }
-        function step(ts) {
-            if (!startTime) startTime = ts;
-            const p = Math.min((ts - startTime) / duration, 1);
-            window.scrollTo(0, start + (end - start) * ease(p));
-            if (p < 1) requestAnimationFrame(step);
-        }
-        requestAnimationFrame(step);
-    }
-
-    /* ---------- News カード → Publication カテゴリへスクロール ---------- */
-    // ドラッグ操作と誤判定しないよう，mousedown 時の位置を記録して判定
-    let dragMoved = false;
-    track.addEventListener('mousedown', () => { dragMoved = false; });
-    track.addEventListener('mousemove', () => { dragMoved = true; });
-
-    document.querySelectorAll('.news-card[data-pub-key]').forEach(card => {
-        card.addEventListener('click', e => {
-            if (dragMoved) return; // ドラッグ操作はスキップ
-            const key = card.dataset.pubKey;
-            if (!key) return;
-            const target = document.querySelector(`.pub-category[data-pub-key="${key}"]`);
-            if (!target) return;
-
-            // スクロール
-            smoothScrollToEl(target, 80);
-
-            // ハイライト演出
-            document.querySelectorAll('.pub-category.highlight').forEach(el => el.classList.remove('highlight'));
-            target.classList.add('highlight');
-            setTimeout(() => target.classList.remove('highlight'), 2000);
-        });
-    });
-
     /* ---------- Nav scroll ---------- */
     const nav = document.getElementById('main-nav');
     const backTop = document.getElementById('back-top');
@@ -496,11 +438,28 @@ footer { border-top: 1px solid var(--rule); padding: 2.5rem 3rem; max-width: 110
     }, { passive: true });
     backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    /* ---------- Smooth scroll（ID指定版・Safari対応） ---------- */
+    /* ---------- Smooth scroll (Safari対応) ---------- */
     function smoothScrollTo(targetId) {
         const el = document.getElementById(targetId);
         if (!el) return;
-        smoothScrollToEl(el, 0);
+        const start = window.scrollY;
+        const end   = el.getBoundingClientRect().top + window.scrollY;
+        const duration = 800; // ms
+        let startTime = null;
+
+        function easeInOutCubic(t) {
+            return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        }
+
+        function step(timestamp) {
+            if (!startTime) startTime = timestamp;
+            const elapsed  = timestamp - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            window.scrollTo(0, start + (end - start) * easeInOutCubic(progress));
+            if (progress < 1) requestAnimationFrame(step);
+        }
+
+        requestAnimationFrame(step);
     }
 
     document.querySelectorAll('.nav-links a, .mobile-link').forEach(a => {
