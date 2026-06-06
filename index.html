@@ -36,7 +36,7 @@
     --transition: .4s cubic-bezier(.4,0,.2,1);
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; font-size: 16px; }
+html { scroll-behavior: auto; font-size: 16px; }
 body { background: var(--cream); color: var(--ink); font-family: var(--serif-body); font-weight: 300; line-height: 1.8; overflow-x: hidden; }
 a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
@@ -91,6 +91,7 @@ nav#main-nav.scrolled .nav-toggle span { background: var(--ink); }
 .news-track::-webkit-scrollbar-thumb { background: var(--ink-faint); border-radius: 99px; }
 .news-card { flex: 0 0 280px; scroll-snap-align: start; border: 1px solid var(--rule); border-radius: 2px; overflow: hidden; background: #fff; display: flex; flex-direction: column; transition: border-color var(--transition); }
 .news-card:hover { border-color: rgba(26,24,20,.3); }
+.news-card[data-pub-key] { cursor: pointer; }
 .news-card-img-wrap { overflow: hidden; }
 .news-card-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; filter: grayscale(20%); transition: filter var(--transition), transform .5s ease; }
 .news-card:hover .news-card-img { filter: grayscale(0%); transform: scale(1.02); }
@@ -131,9 +132,13 @@ nav#main-nav.scrolled .nav-toggle span { background: var(--ink); }
 .pub-num { font-family: var(--sans); font-size: .75rem; color: var(--ink-faint); padding-top: .15rem; }
 .pub-text { font-size: 1rem; line-height: 1.85; color: var(--ink-mid); }
 .pub-text em { font-style: italic; color: var(--ink); }
-.pub-award { display: inline-block; font-family: var(--serif-body); font-size: .85rem; font-weight: 700; letter-spacing: .05em; color: var(--cream); background: var(--accent-warm); padding: .2rem .8rem; border-radius: 99px; margin-top: .5rem; }
+.pub-award { display: inline-block; font-family: var(--serif-body); font-size: .85rem; font-weight: 700; letter-spacing: .05em; color: var(--cream); background: var(--accent-warm); padding: .2rem .8rem; border-radius: 99px; margin-top: .5rem; margin-right: .3rem; }
 .pub-text a { color: var(--accent); word-break: break-all; border-bottom: 1px solid transparent; transition: border-color var(--transition); }
 .pub-text a:hover { border-bottom-color: var(--accent); }
+
+/* ハイライト */
+.pub-category.highlight .pub-category-header { background: rgba(45,74,62,.06); border-radius: 4px 4px 0 0; padding-left: .75rem; }
+.pub-category.highlight .pub-category-title { color: var(--accent); }
 
 /* CONTACT */
 #contact { border-top: 1px solid var(--rule); }
@@ -221,7 +226,7 @@ footer { border-top: 1px solid var(--rule); padding: 2.5rem 3rem; max-width: 110
     </div>
 </section>
 
-<!-- NEWS（content.js から自動生成） -->
+<!-- NEWS -->
 <section id="news">
     <div class="section">
         <div class="section-header fade-in">
@@ -239,7 +244,7 @@ footer { border-top: 1px solid var(--rule); padding: 2.5rem 3rem; max-width: 110
     </div>
 </section>
 
-<!-- PROFILE（content.js から自動生成） -->
+<!-- PROFILE -->
 <section id="profile">
     <div class="section">
         <div class="section-header fade-in">
@@ -257,7 +262,7 @@ footer { border-top: 1px solid var(--rule); padding: 2.5rem 3rem; max-width: 110
     </div>
 </section>
 
-<!-- PUBLICATION（content.js から自動生成） -->
+<!-- PUBLICATION -->
 <section id="publication">
     <div class="section">
         <div class="section-header fade-in">
@@ -269,7 +274,7 @@ footer { border-top: 1px solid var(--rule); padding: 2.5rem 3rem; max-width: 110
     </div>
 </section>
 
-<!-- CONTACT（content.js から自動生成） -->
+<!-- CONTACT -->
 <section id="contact">
     <div class="section">
         <div class="section-header fade-in">
@@ -295,14 +300,68 @@ footer { border-top: 1px solid var(--rule); padding: 2.5rem 3rem; max-width: 110
 <script>
 (function () {
 
+    const PUB_CATEGORIES = [
+        { key: 'peer_first',    ja: '査読有り論文（主著）',  en: 'Peer-Reviewed Papers (1st-author)' },
+        { key: 'peer_co',       ja: '査読有り論文（共著）',  en: 'Peer-Reviewed Papers (Co-author)' },
+        { key: 'non_peer',      ja: '査読無し論文',           en: 'Non-Reviewed Papers' },
+        { key: 'international', ja: '国際学会',               en: 'International Conferences' },
+        { key: 'domestic',      ja: '国内学会',               en: 'Domestic Conferences' },
+        { key: 'invited',       ja: '招待講演',               en: 'Invited Talks' },
+        { key: 'awards',        ja: '受賞歴',                 en: 'Awards' },
+        { key: 'others',        ja: 'その他',                 en: 'Others' },
+    ];
+
+    /* ---------- スムーズスクロール ---------- */
+    function smoothScrollToEl(el, offset) {
+        const off = offset !== undefined ? offset : 80;
+        const start = window.scrollY;
+        const end   = el.getBoundingClientRect().top + window.scrollY - off;
+        const duration = 800;
+        let startTime = null;
+        function ease(t) { return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2, 3)/2; }
+        function step(ts) {
+            if (!startTime) startTime = ts;
+            const p = Math.min((ts - startTime) / duration, 1);
+            window.scrollTo(0, start + (end - start) * ease(p));
+            if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+    }
+
+    function smoothScrollTo(targetId) {
+        const el = document.getElementById(targetId);
+        if (!el) return;
+        smoothScrollToEl(el, 0);
+    }
+
     /* ---------- News ---------- */
     const track = document.getElementById('news-track');
+
+    // ドラッグ判定用フラグ
+    let dragMoved = false;
+    let isDragging = false, startX, scrollLeft;
+    track.addEventListener('mousedown', e => {
+        isDragging = true;
+        dragMoved  = false;
+        startX     = e.pageX - track.offsetLeft;
+        scrollLeft = track.scrollLeft;
+        track.style.userSelect = 'none';
+    });
+    window.addEventListener('mouseup', () => { isDragging = false; track.style.userSelect = ''; });
+    track.addEventListener('mousemove', e => {
+        if (!isDragging) return;
+        e.preventDefault();
+        dragMoved = true;
+        track.scrollLeft = scrollLeft - (e.pageX - track.offsetLeft - startX);
+    });
+
     NEWS.forEach(n => {
         const imgHtml = n.img
-            ? `<div class="news-card-img-wrap"><img class="news-card-img" src="${n.img}" alt="${n.alt}" onerror="this.closest('.news-card-img-wrap').style.display='none'"></div>`
+            ? `<div class="news-card-img-wrap"><img class="news-card-img" src="${n.img}" alt="${n.alt || ''}" onerror="this.closest('.news-card-img-wrap').style.display='none'"></div>`
             : '';
+        const pubAttr = n.pubKey ? ` data-pub-key="${n.pubKey}"` : '';
         track.insertAdjacentHTML('beforeend', `
-            <div class="news-card">
+            <div class="news-card"${pubAttr}>
                 ${imgHtml}
                 <div class="news-card-body">
                     <div class="news-card-meta">
@@ -312,6 +371,21 @@ footer { border-top: 1px solid var(--rule); padding: 2.5rem 3rem; max-width: 110
                     <p class="news-card-text">${n.text}</p>
                 </div>
             </div>`);
+    });
+
+    // pubKey 付きカードのクリックで Publication カテゴリへスクロール
+    track.addEventListener('click', e => {
+        if (dragMoved) return; // ドラッグ操作はスキップ
+        const card = e.target.closest('.news-card[data-pub-key]');
+        if (!card) return;
+        const key = card.dataset.pubKey;
+        const target = document.querySelector(`.pub-category[data-pub-key="${key}"]`);
+        if (!target) return;
+        smoothScrollToEl(target, 80);
+        // ハイライト演出
+        document.querySelectorAll('.pub-category.highlight').forEach(el => el.classList.remove('highlight'));
+        target.classList.add('highlight');
+        setTimeout(() => target.classList.remove('highlight'), 2000);
     });
 
     /* ---------- Profile ---------- */
@@ -331,38 +405,32 @@ footer { border-top: 1px solid var(--rule); padding: 2.5rem 3rem; max-width: 110
             return `<div class="data-item">${name}<span class="sub">${a.en}</span></div>`;
         }).join('')
     ));
-
     pd.insertAdjacentHTML('beforeend', dataGroup('Education', '学歴',
         PROFILE.education.map(e =>
             `<div class="data-item"><span class="year">${e.year}</span>${e.ja}<span class="sub">${e.en}</span></div>`
         ).join('')
     ));
-
     pd.insertAdjacentHTML('beforeend', dataGroup('Experience', '職歴',
         PROFILE.experience.map(e =>
             `<div class="data-item"><span class="year">${e.period}</span>${e.ja}<span class="sub">${e.en}</span></div>`
         ).join('')
     ));
-
     pd.insertAdjacentHTML('beforeend', `<div class="data-group fade-in">
         <div class="data-label">Research Interests ／ 研究対象</div>
         <div class="tags">${PROFILE.interests.map(i =>
             `<span class="tag">${i.ja}</span><span class="tag">${i.en}</span>`
         ).join('')}</div>
     </div>`);
-
     pd.insertAdjacentHTML('beforeend', dataGroup('Grants', '助成金',
         PROFILE.grants.map(g =>
             `<div class="data-item"><span class="year">${g.period}</span>${g.ja}<span class="sub">${g.en}</span></div>`
         ).join('')
     ));
-
     pd.insertAdjacentHTML('beforeend', dataGroup('Academic Societies', '所属学会',
         PROFILE.societies.map(s =>
             `<div class="data-item"><a href="${s.url}" target="_blank">${s.ja}</a><span class="sub">${s.en}</span></div>`
         ).join('')
     ));
-
     pd.insertAdjacentHTML('beforeend', dataGroup('Links', '外部リンク',
         PROFILE.links.map(l =>
             `<div class="data-item"><a href="${l.url}" target="_blank">${l.label}</a></div>`
@@ -371,30 +439,20 @@ footer { border-top: 1px solid var(--rule); padding: 2.5rem 3rem; max-width: 110
 
     /* ---------- Publications ---------- */
     const pubEl = document.getElementById('publication-data');
-    const PUB_CATEGORIES = [
-        { key: 'peer_first',    ja: '査読有り論文（主著）',  en: 'Peer-Reviewed Papers (1st-author)' },
-        { key: 'peer_co',       ja: '査読有り論文（共著）',  en: 'Peer-Reviewed Papers (Co-author)' },
-        { key: 'non_peer',      ja: '査読無し論文',           en: 'Non-Reviewed Papers' },
-        { key: 'international', ja: '国際学会',               en: 'International Conferences' },
-        { key: 'domestic',      ja: '国内学会',               en: 'Domestic Conferences' },
-        { key: 'invited',       ja: '招待講演',               en: 'Invited Talks' },
-        { key: 'awards',        ja: '受賞歴',                 en: 'Awards' },
-        { key: 'others',        ja: 'その他',                 en: 'Others' },
-    ];
     PUB_CATEGORIES.forEach(cat => {
         const items = PUBLICATIONS[cat.key];
         if (!items || items.length === 0) return;
         const itemsHtml = items.map((p, i) => {
-            const doiHtml   = p.doi ? `<br>doi: <a href="${p.doi}" target="_blank">${p.doi.replace('https://doi.org/','')}</a>` : '';
+            const doiHtml   = p.doi ? `<br>doi: <a href="${p.doi.startsWith('http') ? p.doi : 'https://doi.org/' + p.doi}" target="_blank">${p.doi.replace('https://doi.org/','')}</a>` : '';
             const awards    = p.award ? (Array.isArray(p.award) ? p.award : [p.award]) : [];
-            const awardHtml = awards.length ? `<div>${awards.map(a => `<span class="pub-award">★ ${a}</span>`).join(' ')}</div>` : '';
+            const awardHtml = awards.length ? `<div>${awards.map(a => `<span class="pub-award">★ ${a}</span>`).join('')}</div>` : '';
             return `<div class="pub-item">
                 <span class="pub-num">${i + 1}</span>
                 <div class="pub-text">${p.text}${doiHtml}${awardHtml}</div>
             </div>`;
         }).join('');
         pubEl.insertAdjacentHTML('beforeend', `
-            <div class="pub-category fade-in">
+            <div class="pub-category fade-in" data-pub-key="${cat.key}">
                 <div class="pub-category-header">
                     <span class="pub-category-title">${cat.ja} &nbsp;/&nbsp; ${cat.en}</span>
                 </div>
@@ -420,7 +478,7 @@ footer { border-top: 1px solid var(--rule); padding: 2.5rem 3rem; max-width: 110
         PROFILE.links.map(l => `<a href="${l.url}" target="_blank">${l.label}</a>`).join('');
 
     /* ---------- Nav scroll ---------- */
-    const nav = document.getElementById('main-nav');
+    const nav     = document.getElementById('main-nav');
     const backTop = document.getElementById('back-top');
     window.addEventListener('scroll', () => {
         const y = window.scrollY;
@@ -438,30 +496,7 @@ footer { border-top: 1px solid var(--rule); padding: 2.5rem 3rem; max-width: 110
     }, { passive: true });
     backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    /* ---------- Smooth scroll (Safari対応) ---------- */
-    function smoothScrollTo(targetId) {
-        const el = document.getElementById(targetId);
-        if (!el) return;
-        const start = window.scrollY;
-        const end   = el.getBoundingClientRect().top + window.scrollY;
-        const duration = 800; // ms
-        let startTime = null;
-
-        function easeInOutCubic(t) {
-            return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-        }
-
-        function step(timestamp) {
-            if (!startTime) startTime = timestamp;
-            const elapsed  = timestamp - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            window.scrollTo(0, start + (end - start) * easeInOutCubic(progress));
-            if (progress < 1) requestAnimationFrame(step);
-        }
-
-        requestAnimationFrame(step);
-    }
-
+    /* ---------- Nav links smooth scroll ---------- */
     document.querySelectorAll('.nav-links a, .mobile-link').forEach(a => {
         a.addEventListener('click', e => {
             const href = a.getAttribute('href');
@@ -472,7 +507,7 @@ footer { border-top: 1px solid var(--rule); padding: 2.5rem 3rem; max-width: 110
     });
 
     /* ---------- Mobile menu ---------- */
-    const toggle = document.getElementById('nav-toggle');
+    const toggle     = document.getElementById('nav-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
     toggle.addEventListener('click', () => {
         const open = toggle.classList.toggle('open');
@@ -487,14 +522,10 @@ footer { border-top: 1px solid var(--rule); padding: 2.5rem 3rem; max-width: 110
         });
     });
 
-    /* ---------- News scroll ---------- */
+    /* ---------- News ←→ ボタン ---------- */
     const STEP = 300;
     document.getElementById('news-prev').addEventListener('click', () => track.scrollBy({ left: -STEP, behavior: 'smooth' }));
     document.getElementById('news-next').addEventListener('click', () => track.scrollBy({ left:  STEP, behavior: 'smooth' }));
-    let isDragging = false, startX, scrollLeft;
-    track.addEventListener('mousedown', e => { isDragging = true; startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft; track.style.userSelect = 'none'; });
-    window.addEventListener('mouseup', () => { isDragging = false; track.style.userSelect = ''; });
-    track.addEventListener('mousemove', e => { if (!isDragging) return; e.preventDefault(); track.scrollLeft = scrollLeft - (e.pageX - track.offsetLeft - startX); });
 
     /* ---------- Fade-in ---------- */
     const observer = new IntersectionObserver((entries) => {
@@ -515,44 +546,23 @@ footer { border-top: 1px solid var(--rule); padding: 2.5rem 3rem; max-width: 110
             playPromise.catch(() => {
                 const popup = document.createElement('div');
                 popup.style.cssText = `
-                    position: fixed;
-                    bottom: 2rem;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    z-index: 200;
-                    background: rgba(26,24,20,.88);
-                    backdrop-filter: blur(12px);
-                    color: #f5f2ec;
-                    font-family: 'BIZ UDPGothic', sans-serif;
-                    font-size: .78rem;
-                    line-height: 1.8;
-                    letter-spacing: .05em;
-                    padding: 1rem 1.5rem;
-                    border-radius: 6px;
-                    text-align: center;
-                    max-width: 320px;
-                    width: calc(100% - 3rem);
-                    box-shadow: 0 4px 24px rgba(0,0,0,.25);
-                    opacity: 0;
-                    transition: opacity .4s ease;
+                    position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
+                    z-index: 200; background: rgba(26,24,20,.88); backdrop-filter: blur(12px);
+                    color: #f5f2ec; font-family: 'BIZ UDPGothic', sans-serif;
+                    font-size: .78rem; line-height: 1.8; letter-spacing: .05em;
+                    padding: 1rem 1.5rem; border-radius: 6px; text-align: center;
+                    max-width: 320px; width: calc(100% - 3rem);
+                    box-shadow: 0 4px 24px rgba(0,0,0,.25); opacity: 0; transition: opacity .4s ease;
                 `;
                 popup.innerHTML = `
                     低電力モードを解除することで，<br>動画を再生できます<br>
                     <span style="font-size:.7rem; opacity:.6; display:block; margin-top:.3rem;">
                         Disable Low Power Mode to play the background video.
                     </span>
-                    <button style="
-                        margin-top: .8rem;
-                        font-family: 'BIZ UDPGothic', sans-serif;
-                        font-size: .68rem;
-                        letter-spacing: .12em;
-                        color: #f5f2ec;
-                        background: none;
-                        border: 1px solid rgba(245,242,236,.4);
-                        padding: .3rem 1rem;
-                        border-radius: 99px;
-                        cursor: pointer;
-                    ">閉じる</button>
+                    <button style="margin-top:.8rem; font-family:'BIZ UDPGothic',sans-serif;
+                        font-size:.68rem; letter-spacing:.12em; color:#f5f2ec; background:none;
+                        border:1px solid rgba(245,242,236,.4); padding:.3rem 1rem;
+                        border-radius:99px; cursor:pointer;">閉じる</button>
                 `;
                 document.body.appendChild(popup);
                 requestAnimationFrame(() => { popup.style.opacity = '1'; });
