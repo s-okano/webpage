@@ -266,14 +266,14 @@ const PUBLICATIONS = {
    CONTACT
    ============================================================ */
 const CONTACT = {
-    tel:   "+81-92-802-3395",
+    tel:   "092-802-3395",
     email: "s-okano@doc.kyushu-u.ac.jp",
     address: {
         ja: `九州大学大学院 工学府土木工学専攻 災害数理研究室<br>
-〒819-0395 福岡県福岡市西区元岡744番地<br>
-九州大学伊都キャンパス ウエスト2号館11階 1106号室`,
+        〒819-0395 福岡県福岡市西区元岡744番地<br>
+        九州大学伊都キャンパス ウエスト2号館11階 1106号室`,
         en: `Crisis Informatics Laboratory,<br>
-Department of Civil Engineering, Kyushu University Ito Campus<br>
-744 Motooka, Nishi-ku, Fukuoka, 819-0395, Japan`,
+        Department of Civil Engineering, Kyushu University Ito Campus<br>
+        #1106, 744 Motooka, Nishi-ku, Fukuoka, 819-0395, Japan`,
     },
 };
