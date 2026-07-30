@@ -3,6 +3,13 @@
    ============================================================ */
 const NEWS = [
     {
+        date: "2026.07.29",
+        tag:  "Conference",
+        pubKey: "domestic",
+        text: "京都工芸繊維大学 高性能シミュレーション研究センターで招待講演を行いました！",
+        img:  "news/202607_kyoto.jpg",
+    },
+    {
         date: "2026.06.05",
         tag:  "Conference",
         pubKey: "domestic",
@@ -210,6 +217,10 @@ const PUBLICATIONS = {
 
     /* --- 招待講演 --- */
     invited: [
+        {
+            text: `<strong class="author">岡野翔大</strong> : 留学で身についた「常識を疑う癖」から生まれた新しい粒子法：VMSPH，<em>京都工芸繊維大学 高性能シミュレーション研究センター（HPSRC） NODE TALK #3</em>，京都，2026.07.`,
+            doi: "", award: "",
+        },
         {
             text: `<strong class="author">岡野翔大</strong> : 変分マルチスケール法を導入した速度-圧力一体型流体解析アルゴリズム，<em>第13回マルチメソッド・新数値解析手法開拓研究会</em>，オンライン，2025.06.`,
             doi: "", award: "",
