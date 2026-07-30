@@ -4,8 +4,8 @@
 const NEWS = [
     {
         date: "2026.07.29",
-        tag:  "Conference",
-        pubKey: "domestic",
+        tag:  "Invited talk",
+        pubKey: "invited",
         text: "京都工芸繊維大学 高性能シミュレーション研究センターで招待講演を行いました！",
         img:  "news/202607_kyoto.jpg",
     },
