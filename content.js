@@ -3,6 +3,13 @@
    ============================================================ */
 const NEWS = [
     {
+        date: "2026.09.08",
+        tag:  "Conference",
+        pubKey: "domestic",
+        text: "令和8年度土木学会全国大会およびJSCES夏季学生講演会2026に参加しました！",
+        img:  "news/202609_tsukuba.jpg",
+    },
+    {
         date: "2026.07.29",
         tag:  "Invited talk",
         pubKey: "invited",
@@ -166,6 +173,18 @@ const PUBLICATIONS = {
     /* --- 国内学会 --- */
     domestic: [
         {
+            text: `<strong class="author">岡野翔大</strong> : 楕円体カーネル関数を用いたUpdated Lagrangian SPH，<em>JSCES夏季学生講演会2026</em>，茨城，2026.09.`,
+            doi: "", award: "",
+        },
+        {
+            text: `<strong class="author">岡野翔大</strong>，新舘京平 : hogehoge，<em>JSCES夏季学生講演会2026 学生主導セッション</em>，茨城，2026.09.`,
+            doi: "", award: "",
+        },
+        {
+            text: `<strong class="author">岡野翔大</strong>，森川ダニエル，浅井光輝 : 速度-圧力一体型SPH法（VM-SPH）による高精度・ロバストな高粘性流体解析，<em>令和8年度土木学会全国大会 第81回年次学術講演会</em>，北海道，2026.09.`,
+            doi: "", award: "",
+        },
+        {
             text: `<strong class="author">岡野翔大</strong>，森川ダニエル，一色正晴，浅井光輝 : VM-SPHによる3次元大規模流体解析に向けた前処理付き反復ソルバーの開発，<em>第31回計算工学講演会</em>，愛知，2026.06.`,
             doi: "", award: ["グラフィクスアワード 動画賞","グラフィクスアワード 特別賞（Visual Computing賞）","グラフィクスアワード 特別賞（Digital Twin賞）"],
         },
@@ -175,6 +194,10 @@ const PUBLICATIONS = {
         },
         {
             text: `<strong class="author">岡野翔大</strong> : 固体-流体の強連成解析に向けたVM-SPH法の開発（ポスター発表），<em>JSCES夏季学生講演会2025</em>，茨城，2025.09.`,
+            doi: "", award: "",
+        },
+        {
+            text: `馬込望，<strong class="author">岡野翔大</strong> : 粒子法×SFEMによるトビウオ型海難救助ビークルの設計支援，<em>JSCES夏季学生講演会2025 学生主導セッション</em>，茨城，2025.09.`,
             doi: "", award: "",
         },
         {
