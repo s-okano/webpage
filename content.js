@@ -6,8 +6,15 @@ const NEWS = [
         date: "2026.09.08",
         tag:  "Conference",
         pubKey: "domestic",
-        text: "令和8年度土木学会全国大会およびJSCES夏季学生講演会2026に参加しました！",
+        text: "JSCES夏季学生講演会2026に参加しました！また，優秀講演賞および優秀ポスター賞を受賞しました！",
         img:  "news/202609_tsukuba.jpg",
+    },
+    {
+        date: "2026.09.05",
+        tag:  "Conference",
+        pubKey: "domestic",
+        text: "令和8年度土木学会全国大会 第81回年次学術講演会に参加しました！",
+        img:  "news/202609_hokkaido.jpg",
     },
     {
         date: "2026.07.29",
@@ -173,12 +180,12 @@ const PUBLICATIONS = {
     /* --- 国内学会 --- */
     domestic: [
         {
-            text: `<strong class="author">岡野翔大</strong> : 楕円体カーネル関数を用いたUpdated Lagrangian SPH，<em>JSCES夏季学生講演会2026</em>，茨城，2026.09.`,
-            doi: "", award: "",
+            text: `<strong class="author">岡野翔大</strong> : 変形カーネル関数を用いたUpdated Lagrangian SPH，<em>JSCES夏季学生講演会2026</em>，茨城，2026.09.`,
+            doi: "", award: "優秀ポスター賞",
         },
         {
-            text: `<strong class="author">岡野翔大</strong>，新舘京平 : hogehoge，<em>JSCES夏季学生講演会2026 学生主導セッション</em>，茨城，2026.09.`,
-            doi: "", award: "",
+            text: `<strong class="author">岡野翔大</strong>，新舘京平 : 未知環境で自己予測する柔軟ロボットのための大変形・接触SPH-ROM，<em>JSCES夏季学生講演会2026 学生主導セッション</em>，茨城，2026.09.`,
+            doi: "", award: "優秀講演賞",
         },
         {
             text: `<strong class="author">岡野翔大</strong>，森川ダニエル，浅井光輝 : 速度-圧力一体型SPH法（VM-SPH）による高精度・ロバストな高粘性流体解析，<em>令和8年度土木学会全国大会 第81回年次学術講演会</em>，北海道，2026.09.`,
@@ -252,6 +259,14 @@ const PUBLICATIONS = {
 
     /* --- 受賞歴 --- */
     awards: [
+        {
+            text: `<strong class="author">岡野翔大</strong> : 優秀ポスター賞，<em>JSCES夏季学生講演会2026</em>，2026.09.`,
+            doi: "", award: "",
+        },
+        {
+            text: `<strong class="author">岡野翔大</strong>，新舘京平 : 優秀講演賞，<em>JSCES夏季学生講演会2026 学生主導セッション</em>，2026.09.`,
+            doi: "", award: "",
+        },
         {
             text: `<strong class="author">岡野翔大</strong>，森川ダニエル，一色正晴，浅井光輝 : グラフィクスアワード 動画賞，<em>第31回計算工学講演会</em>，2026.06.`,
             doi: "", award: "",
