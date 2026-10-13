@@ -3,6 +3,13 @@
    ============================================================ */
 const NEWS = [
     {
+        date: "2026.10.13",
+        tag:  "Paper",
+        pubKey: "peer_first",
+        text: "Computer Methods in Applied Mechanics and Engineeringに論文が掲載されました！",
+        img:  "news/202610_CMAME.jpg",
+    },
+    {
         date: "2026.09.08",
         tag:  "Conference",
         pubKey: "domestic",
@@ -117,12 +124,13 @@ const PUBLICATIONS = {
     /* --- 査読有り論文（主著） --- */
     peer_first: [
         {
-            text: `<strong class="author">Shodai Okano</strong>，Mitsuteru Asai, Daniel Shigueo Morikawa, Shujiro Fujioka, Louis Ge: A Projection-Free Monolithic SPH Formulation for Incompressible Flows Using Variational Multiscale Stabilization，<em>Computer Methods in Applied Mechanics and Engineering</em>, in press, 2026.`,
-            doi: "", award: "",
+            text: `<strong class="author">Shodai Okano</strong>，Mitsuteru Asai, Daniel Shigueo Morikawa, Shujiro Fujioka, Louis Ge: A Projection-Free Monolithic SPH Formulation for Incompressible Flows Using Variational Multiscale Stabilization，<em>Computer Methods in Applied Mechanics and Engineering</em>, Vol. 464, Part A, pp.119471, 2027.`,
+            doi: "https://doi.org/10.1016/j.cma.2026.119471",
+            award: "",
         },
         {
             text: `<strong class="author">岡野翔大</strong>，森川ダニエル，大﨑春輝，浅井光輝 : μ(I)レオロジーを用いた流動化地盤解析の陰的SPH法による効率化，<em>土木学会論文集特集号（応用力学）</em>，Vol. 80, No. 15, pp.23-15018, 2024.
-            [<strong class="author">Shodai Okano</strong>, Daniel Morikawa, Haruki Osaki and Mitsuteru Asai: Efficient Fluidized Ground Analysis using µ(I) Rheology with Implicit SPH Method, <em>Japanese Journal of JSCE No.2 Special issue (Applied Mechanics)</em>, Vol. 80, No. 15, p.23-15018, 2024.]`,
+            [<strong class="author">Shodai Okano</strong>, Daniel Morikawa, Haruki Osaki and Mitsuteru Asai: Efficient Fluidized Ground Analysis using µ(I) Rheology with Implicit SPH Method, <em>Japanese Journal of JSCE No.2 Special issue (Applied Mechanics)</em>, Vol. 80, No. 15, pp.23-15018, 2024.]`,
             doi:   "https://doi.org/10.2208/jscejj.23-15018",
             award: "応用力学論文賞",
         },
@@ -139,10 +147,10 @@ const PUBLICATIONS = {
 
     /* --- 査読無し論文 --- */
     non_peer: [
-        // {
-        //     text: `<strong class="author">岡野翔大</strong>，森川ダニエル，一色正晴，浅井光輝 : VM-SPHによる3次元大規模流体解析に向けた前処理付き反復ソルバーの開発，<em>計算工学講演会論文集</em>，Vol. 31, pp. 860-864, 2026.`,
-        //     doi: "", award: "",
-        // },
+        {
+            text: `<strong class="author">岡野翔大</strong>，森川ダニエル，一色正晴，浅井光輝 : VM-SPHによる3次元大規模流体解析に向けた前処理付き反復ソルバーの開発，<em>計算工学講演会論文集</em>，Vol. 31, 2026.`,
+            doi: "", award: "",
+        },
         {
             text: `<strong class="author">岡野翔大</strong>，森川ダニエル，葛宇甯，浅井光輝 : 変分マルチスケール法による安定化を導入した速度-圧力一体型SPH流体解析，<em>計算工学講演会論文集</em>，Vol. 30, pp. 860-864, 2025.`,
             doi: "", award: "",
@@ -263,6 +271,10 @@ const PUBLICATIONS = {
 
     /* --- 受賞歴 --- */
     awards: [
+        {
+            text: `<strong class="author">岡野翔大</strong> : 優秀ポスター賞，<em>JSCES夏季学生講演会2026</em>，2026.09.`,
+            doi: "", award: "",
+        },
         {
             text: `<strong class="author">岡野翔大</strong> : 優秀ポスター賞，<em>JSCES夏季学生講演会2026</em>，2026.09.`,
             doi: "", award: "",
