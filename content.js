@@ -276,10 +276,6 @@ const PUBLICATIONS = {
             doi: "", award: "",
         },
         {
-            text: `<strong class="author">岡野翔大</strong> : 優秀ポスター賞，<em>JSCES夏季学生講演会2026</em>，2026.09.`,
-            doi: "", award: "",
-        },
-        {
             text: `<strong class="author">岡野翔大</strong>，新舘京平 : 優秀講演賞，<em>JSCES夏季学生講演会2026 学生主導セッション</em>，2026.09.`,
             doi: "", award: "",
         },
